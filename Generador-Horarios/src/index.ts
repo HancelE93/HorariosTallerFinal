@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from "cors";
+import courseRoutes from './routes/course.routes.js';
 
 const app = express();
 const PORT = 3000;
@@ -7,6 +8,7 @@ const PORT = 3000;
 app.use(cors())
 app.use(express.json());
 
+app.use("/courses", courseRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`)
