@@ -1,13 +1,30 @@
 import { type Request, type Response } from 'express';
 import prisma from '../database/prisma.js';
-import { type ScheduleConfiguration, type Course, calculateCombinationCount } from '../utils/scheduleGenerator.js';
+import { type ScheduleConfiguration, type Course, calculateCombinationCount, generateCombinations } from '../utils/scheduleGenerator.js';
 
 export const generarHorarios = async (req: Request, res: Response) => {
   try {
     const config: ScheduleConfiguration = req.body;
 
-    // Se obtiene la lista de materias como conjutno universal
-    const dbCourses = await prisma.courses.findMany();
+    // Se obtiene la lista de materias como conjutno universal ahora con prerequisitos
+    const dbCourses = await prisma.courses.findMany({
+      include: { prerequisites_prerequisites_course_idTocourses: true }
+    });
+
+    // Mapear hacia la interfaz Course
+    const courses: Course[] = dbCourses.map(c => ({
+      id: c.id,
+      name: c.name,
+      day: c.day,
+      startTime: String(c.start_time),
+      endTime: String(c.end_time),
+      modality: c.modality,
+      difficulty: c.difficulty,
+      credits: c.credits,
+      prerequisites: c.prerequisites_prerequisites_course_idTocourses 
+        ? c.prerequisites_prerequisites_course_idTocourses.map(p => p.prerequisite_course_id) 
+        : []
+    }));
 
     const totalCoursesInDb = dbCourses.length;
 
@@ -20,12 +37,15 @@ export const generarHorarios = async (req: Request, res: Response) => {
 
     const totalCombinations = calculateCombinationCount(totalCoursesInDb, config.numberOfCourses);
 
+    const possibleCombinations = generateCombinations(courses, config.numberOfCourses);
+    
     // Respuesta parcial de prueba
     return res.status(200).json({
       totalCourses: totalCoursesInDb,
       selectedAmount: config.numberOfCourses,
       totalCombinations: totalCombinations,
-      message: `Con ${totalCoursesInDb} materias disponibles se pueden formar ${totalCombinations} combinaciones de ${config.numberOfCourses} materias.`
+      generatedCombinationsCount: possibleCombinations.length,
+      combinations: possibleCombinations
     });
 
   } catch (error) {

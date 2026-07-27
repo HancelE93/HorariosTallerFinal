@@ -46,3 +46,32 @@ export function calculateCombinationCount(n: number, r: number): number {
   return Math.round(factorial(n) / (factorial(r) * factorial(n - r)));
 }
 
+
+/**
+ * Genera recursivamente todas las combinaciones posibles de tamaño `size` (r)
+ * a partir del arreglo de materias `elements` (n).
+ */
+export function generateCombinations(elements: Course[], size: number): Course[][] {
+  const results: Course[][] = [];
+
+  function combine(startIndex: number, currentCombination: Course[]) {
+    // Caso base: se alcanzó el tamaño de materias requerido para el horario
+    if (currentCombination.length === size) {
+      results.push([...currentCombination]);
+      return;
+    }
+
+    // Recorrido recursivo para formar las agrupaciones
+    for (let index = startIndex; index < elements.length; index++) {
+      const course = elements[index];
+      if (!course) continue; // Si por alguna razón es undefined, lo salta
+
+      currentCombination.push(course);
+      combine(index + 1, currentCombination);
+      currentCombination.pop(); // Backtracking
+    }
+  }
+
+  combine(0, []);
+  return results;
+}
