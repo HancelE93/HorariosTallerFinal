@@ -1,0 +1,72 @@
+.lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-left: 6px solid #2563eb;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+    color: #2563eb;
+    margin-bottom: 18px;
+    font-size: 22px;
+}
+
+.card p {
+    margin: 10px 0;
+    color: #4b5563;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.btn-editar {
+    flex: 1;
+    background: #f59e0b;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-editar:hover {
+    background: #d97706;
+}
+
+.btn-eliminar {
+    flex: 1;
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-eliminar:hover {
+    background: #dc2626;
+}
