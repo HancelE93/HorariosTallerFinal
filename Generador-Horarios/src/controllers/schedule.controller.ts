@@ -1,6 +1,6 @@
 import { type Request, type Response } from 'express';
 import prisma from '../database/prisma.js';
-import { type ScheduleConfiguration, type Course } from '../utils/scheduleGenerator.js';
+import { type ScheduleConfiguration, type Course, calculateCombinationCount } from '../utils/scheduleGenerator.js';
 
 export const generarHorarios = async (req: Request, res: Response) => {
   try {
@@ -18,11 +18,14 @@ export const generarHorarios = async (req: Request, res: Response) => {
       });
     }
 
-    // Se evalua la logica que contenga la materias disponibles 
+    const totalCombinations = calculateCombinationCount(totalCoursesInDb, config.numberOfCourses);
+
+    // Respuesta parcial de prueba
     return res.status(200).json({
-      message: "Configuración recibida y validada correctamente.",
-      availableCourses: totalCoursesInDb,
-      requestedCourses: config.numberOfCourses
+      totalCourses: totalCoursesInDb,
+      selectedAmount: config.numberOfCourses,
+      totalCombinations: totalCombinations,
+      message: `Con ${totalCoursesInDb} materias disponibles se pueden formar ${totalCombinations} combinaciones de ${config.numberOfCourses} materias.`
     });
 
   } catch (error) {

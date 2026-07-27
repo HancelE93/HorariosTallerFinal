@@ -27,4 +27,22 @@ export interface ScheduleConfiguration {
   completedCourses?: number[]; // IDs de materias aprobadas previamente
 }
 
+// Aplica la fórmula C(n, r) = n! / (r! * (n - r)!) para calcular la cantidad teórica de combinaciones posibles 
+// de n elementos tomados de r en r. Devuelve 0 si r es menor que 0 o mayor que n.
+
+// Calcula el factorial de un número n! de forma iterativa. Casos base: 0! = 1, 1! = 1.
+export function factorial(n: number): number {
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+
+// Obtenido el factorial se procede a calcular la cantidad de combinaciones posibles usando la fórmula combinatoria.
+// Aplica la fórmula C(n, r) = n! / (r! * (n - r)!)
+export function calculateCombinationCount(n: number, r: number): number {
+  if (r < 0 || r > n) return 0;
+  return Math.round(factorial(n) / (factorial(r) * factorial(n - r)));
+}
 
