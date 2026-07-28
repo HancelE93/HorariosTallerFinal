@@ -1,6 +1,12 @@
 import { type Request, type Response } from 'express';
 import prisma from '../database/prisma.js';
-import { type ScheduleConfiguration, type Course, calculateCombinationCount, generateCombinations } from '../utils/scheduleGenerator.js';
+import {
+  type ScheduleConfiguration,
+  type Course,
+  calculateCombinationCount,
+  generateCombinations,
+  getCourseNameSet
+} from '../utils/scheduleGenerator.js';
 
 export const generarHorarios = async (req: Request, res: Response) => {
   try {
@@ -21,8 +27,8 @@ export const generarHorarios = async (req: Request, res: Response) => {
       modality: c.modality,
       difficulty: c.difficulty,
       credits: c.credits,
-      prerequisites: c.prerequisites_prerequisites_course_idTocourses 
-        ? c.prerequisites_prerequisites_course_idTocourses.map(p => p.prerequisite_course_id) 
+      prerequisites: c.prerequisites_prerequisites_course_idTocourses
+        ? c.prerequisites_prerequisites_course_idTocourses.map(p => p.prerequisite_course_id)
         : []
     }));
 
@@ -38,14 +44,20 @@ export const generarHorarios = async (req: Request, res: Response) => {
     const totalCombinations = calculateCombinationCount(totalCoursesInDb, config.numberOfCourses);
 
     const possibleCombinations = generateCombinations(courses, config.numberOfCourses);
-    
+
+    // Convertir cada combinación en un conjunto (Set)
+    const scheduleSets = possibleCombinations.map(schedule =>
+      getCourseNameSet(schedule)
+    );
+
     // Respuesta parcial de prueba
     return res.status(200).json({
       totalCourses: totalCoursesInDb,
       selectedAmount: config.numberOfCourses,
-      totalCombinations: totalCombinations,
+      totalCombinations,
       generatedCombinationsCount: possibleCombinations.length,
-      combinations: possibleCombinations
+      combinations: possibleCombinations,
+      scheduleSets
     });
 
   } catch (error) {

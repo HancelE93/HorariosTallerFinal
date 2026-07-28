@@ -71,7 +71,18 @@ export function generateCombinations(elements: Course[], size: number): Course[]
       currentCombination.pop(); // Backtracking
     }
   }
+  
 
   combine(0, []);
   return results;
+}
+
+/**
+ * Convierte una combinación de materias en un conjunto
+ * con los nombres de las materias.
+ */
+export function getCourseNameSet(schedule: Course[]): Set<string> {
+  return new Set(
+    schedule.map(course => course.name)
+  );
 }
