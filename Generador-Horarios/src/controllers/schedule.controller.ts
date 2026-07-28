@@ -8,7 +8,10 @@ import {
   getCourseNameSet,
   includesRequiredCourses,
   hasScheduleConflicts,
-  filterValidSchedules
+  filterValidSchedules,
+  validateMaximumCredits,
+  validateMaximumDifficulty,
+  validateRequiredModality
 } from "../utils/scheduleGenerator.js";
 
 export const generarHorarios = async (req: Request, res: Response) => {
@@ -67,11 +70,41 @@ export const generarHorarios = async (req: Request, res: Response) => {
       hasScheduleConflicts(schedule)
     );
 
+
+    // Validar créditos máximos
+    const creditResults = possibleCombinations.map(schedule =>
+      validateMaximumCredits(
+        schedule,
+        config.maximumCredits
+      )
+    );
+
+    // Validar cantidad máxima de materias difíciles
+    const difficultyResults = possibleCombinations.map(schedule =>
+      validateMaximumDifficulty(
+        schedule,
+        config.maximumDifficultCourses
+      )
+    );
+
+    // Validar modalidad requerida
+    const modalityResults = possibleCombinations.map(schedule =>
+      validateRequiredModality(
+        schedule,
+        config.requiredModality
+      )
+    );
+
+
     const validSchedules = filterValidSchedules(
       possibleCombinations,
       validationResults,
-      conflictResults
+      conflictResults,
+      creditResults,
+      difficultyResults,
+      modalityResults
     );
+
 
     // Respuesta parcial de prueba
     return res.status(200).json({
@@ -84,7 +117,13 @@ export const generarHorarios = async (req: Request, res: Response) => {
 
       validationResults,
 
-      conflictResults
+      conflictResults,
+
+      creditResults,
+
+      difficultyResults,
+
+      modalityResults
 
     });
 

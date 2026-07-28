@@ -152,12 +152,66 @@ export function hasScheduleConflicts(
 export function filterValidSchedules(
   schedules: Course[][],
   requiredResults: boolean[],
-  conflictResults: boolean[]
+  conflictResults: boolean[],
+  creditResults: boolean[],
+  difficultyResults: boolean[],
+  modalityResults: boolean[]
 ): Course[][] {
 
   return schedules.filter((_, index) =>
     requiredResults[index] === true &&
-    conflictResults[index] === false
+    conflictResults[index] === false &&
+    creditResults[index] === true &&
+    difficultyResults[index] === true &&
+    modalityResults[index] === true
   );
 
+}
+
+/**
+ * Verifica que un horario no supere el máximo de créditos permitido
+ */
+export function validateMaximumCredits(
+  schedule: Course[],
+  maximumCredits: number
+): boolean {
+
+  const totalCredits = schedule.reduce(
+    (sum, course) => sum + course.credits,
+    0
+  );
+
+  return totalCredits <= maximumCredits;
+}
+
+/**
+ * Verifica que no se supere la cantidad máxima de materias difíciles
+ */
+export function validateMaximumDifficulty(
+  schedule: Course[],
+  maximumDifficultCourses: number
+): boolean {
+
+  const difficultCourses = schedule.filter(
+    course => course.difficulty === "Avanzado"
+  );
+
+  return difficultCourses.length <= maximumDifficultCourses;
+}
+
+/**
+ * Verifica que las materias cumplan la modalidad requerida
+ */
+export function validateRequiredModality(
+  schedule: Course[],
+  requiredModality?: string
+): boolean {
+
+  if (!requiredModality || requiredModality === "Cualquiera") {
+    return true;
+  }
+
+  return schedule.every(
+    course => course.modality === requiredModality
+  );
 }
