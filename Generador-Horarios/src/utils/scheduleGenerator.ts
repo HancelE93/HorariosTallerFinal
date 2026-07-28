@@ -71,7 +71,7 @@ export function generateCombinations(elements: Course[], size: number): Course[]
       currentCombination.pop(); // Backtracking
     }
   }
-  
+
 
   combine(0, []);
   return results;
@@ -85,4 +85,16 @@ export function getCourseNameSet(schedule: Course[]): Set<string> {
   return new Set(
     schedule.map(course => course.name)
   );
+}
+
+// Verifica que todas las materias obligatorias estén dentro del horario
+export function includesRequiredCourses(
+  scheduleSet: Set<string>,
+  requiredCoursesSet: Set<string>
+): boolean {
+
+  return [...requiredCoursesSet].every(course =>
+    scheduleSet.has(course)
+  );
+
 }

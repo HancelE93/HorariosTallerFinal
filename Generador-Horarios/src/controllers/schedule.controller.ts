@@ -5,8 +5,9 @@ import {
   type Course,
   calculateCombinationCount,
   generateCombinations,
-  getCourseNameSet
-} from '../utils/scheduleGenerator.js';
+  getCourseNameSet,
+  includesRequiredCourses
+} from "../utils/scheduleGenerator.js";
 
 export const generarHorarios = async (req: Request, res: Response) => {
   try {
@@ -50,16 +51,28 @@ export const generarHorarios = async (req: Request, res: Response) => {
       getCourseNameSet(schedule)
     );
 
+    const requiredCoursesSet = new Set(config.requiredCourses);
+
+    const validationResults = scheduleSets.map(scheduleSet =>
+      includesRequiredCourses(
+        scheduleSet,
+        requiredCoursesSet
+      )
+    );
+
     // Respuesta parcial de prueba
     return res.status(200).json({
-      totalCourses: totalCoursesInDb,
-      selectedAmount: config.numberOfCourses,
-      totalCombinations,
-      generatedCombinationsCount: possibleCombinations.length,
-      combinations: possibleCombinations,
-      scheduleSets
-    });
 
+      totalCourses: totalCoursesInDb,
+
+      totalCombinations,
+
+      combinations: possibleCombinations,
+
+      validationResults
+
+    });
+    
   } catch (error) {
     return res.status(500).json({ error: "Error al procesar la configuración del horario." });
   }
