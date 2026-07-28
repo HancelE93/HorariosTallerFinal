@@ -6,7 +6,8 @@ import {
   calculateCombinationCount,
   generateCombinations,
   getCourseNameSet,
-  includesRequiredCourses
+  includesRequiredCourses,
+  hasScheduleConflicts
 } from "../utils/scheduleGenerator.js";
 
 export const generarHorarios = async (req: Request, res: Response) => {
@@ -60,6 +61,11 @@ export const generarHorarios = async (req: Request, res: Response) => {
       )
     );
 
+    // Validar cruces de horario (Paso 8)
+    const conflictResults = possibleCombinations.map(schedule =>
+      hasScheduleConflicts(schedule)
+    );
+
     // Respuesta parcial de prueba
     return res.status(200).json({
 
@@ -69,10 +75,12 @@ export const generarHorarios = async (req: Request, res: Response) => {
 
       combinations: possibleCombinations,
 
-      validationResults
+      validationResults,
+
+      conflictResults
 
     });
-    
+
   } catch (error) {
     return res.status(500).json({ error: "Error al procesar la configuración del horario." });
   }

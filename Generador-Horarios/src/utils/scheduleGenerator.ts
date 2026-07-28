@@ -98,3 +98,50 @@ export function includesRequiredCourses(
   );
 
 }
+
+// Verifica si dos materias tienen cruce de horario
+export function haveTimeConflict(
+  courseA: Course,
+  courseB: Course
+): boolean {
+
+  // Si son días diferentes no existe cruce
+  if (courseA.day !== courseB.day) {
+    return false;
+  }
+
+  // Verifica si los horarios se superponen
+  return (
+    courseA.startTime < courseB.endTime &&
+    courseB.startTime < courseA.endTime
+  );
+
+}
+
+// Verifica si dentro de un horario existen materias cruzadas
+export function hasScheduleConflicts(
+  schedule: Course[]
+): boolean {
+
+  for (let i = 0; i < schedule.length; i++) {
+
+    for (let j = i + 1; j < schedule.length; j++) {
+
+      const courseA = schedule[i];
+      const courseB = schedule[j];
+
+      if (!courseA || !courseB) {
+        continue;
+      }
+
+      if (haveTimeConflict(courseA, courseB)) {
+        return true;
+      }
+
+    }
+
+  }
+
+  return false;
+
+}
