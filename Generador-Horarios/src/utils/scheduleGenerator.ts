@@ -145,3 +145,19 @@ export function hasScheduleConflicts(
   return false;
 
 }
+
+/**
+ * Filtra horarios que cumplen todas las validaciones
+ */
+export function filterValidSchedules(
+  schedules: Course[][],
+  requiredResults: boolean[],
+  conflictResults: boolean[]
+): Course[][] {
+
+  return schedules.filter((_, index) =>
+    requiredResults[index] === true &&
+    conflictResults[index] === false
+  );
+
+}

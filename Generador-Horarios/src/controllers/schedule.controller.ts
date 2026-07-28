@@ -7,7 +7,8 @@ import {
   generateCombinations,
   getCourseNameSet,
   includesRequiredCourses,
-  hasScheduleConflicts
+  hasScheduleConflicts,
+  filterValidSchedules
 } from "../utils/scheduleGenerator.js";
 
 export const generarHorarios = async (req: Request, res: Response) => {
@@ -66,6 +67,12 @@ export const generarHorarios = async (req: Request, res: Response) => {
       hasScheduleConflicts(schedule)
     );
 
+    const validSchedules = filterValidSchedules(
+      possibleCombinations,
+      validationResults,
+      conflictResults
+    );
+
     // Respuesta parcial de prueba
     return res.status(200).json({
 
@@ -73,7 +80,7 @@ export const generarHorarios = async (req: Request, res: Response) => {
 
       totalCombinations,
 
-      combinations: possibleCombinations,
+      validSchedules,
 
       validationResults,
 
