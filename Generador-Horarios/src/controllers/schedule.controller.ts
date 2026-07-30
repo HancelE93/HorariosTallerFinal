@@ -11,7 +11,8 @@ import {
   filterValidSchedules,
   validateMaximumCredits,
   validateMaximumDifficulty,
-  validateRequiredModality
+  validateRequiredModality,
+  validatePrerequisites
 } from "../utils/scheduleGenerator.js";
 
 export const generarHorarios = async (req: Request, res: Response) => {
@@ -96,13 +97,22 @@ export const generarHorarios = async (req: Request, res: Response) => {
     );
 
 
+    const prerequisiteResults = possibleCombinations.map(schedule =>
+      validatePrerequisites(
+        schedule,
+        config.completedCourses,
+        config.validatePrerequisites
+      )
+    );
+
     const validSchedules = filterValidSchedules(
       possibleCombinations,
       validationResults,
       conflictResults,
       creditResults,
       difficultyResults,
-      modalityResults
+      modalityResults,
+      prerequisiteResults
     );
 
 

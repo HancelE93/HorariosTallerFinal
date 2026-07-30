@@ -155,7 +155,8 @@ export function filterValidSchedules(
   conflictResults: boolean[],
   creditResults: boolean[],
   difficultyResults: boolean[],
-  modalityResults: boolean[]
+  modalityResults: boolean[],
+  prerequisiteResults: boolean[]
 ): Course[][] {
 
   return schedules.filter((_, index) =>
@@ -163,7 +164,8 @@ export function filterValidSchedules(
     conflictResults[index] === false &&
     creditResults[index] === true &&
     difficultyResults[index] === true &&
-    modalityResults[index] === true
+    modalityResults[index] === true &&
+    prerequisiteResults[index] === true
   );
 
 }
@@ -213,5 +215,27 @@ export function validateRequiredModality(
 
   return schedule.every(
     course => course.modality === requiredModality
+  );
+}
+
+/**
+ * Verifica que el estudiante cumpla con los prerrequisitos de todas las materias del horario.
+ * Aplica: Subconjuntos y Pertenencia (P_c ⊆ A)
+ */
+export function validatePrerequisites(
+  schedule: Course[],
+  completedCourses: number[] = [],
+  shouldValidate: boolean = true
+): boolean {
+  // Si la opción está desactivada, se asume válido
+  if (!shouldValidate) {
+    return true;
+  }
+
+  const completedSet = new Set(completedCourses);
+
+  // Cada materia en el horario debe tener sus prerrequisitos aprobados
+  return schedule.every(course =>
+    course.prerequisites.every(prereqId => completedSet.has(prereqId))
   );
 }
