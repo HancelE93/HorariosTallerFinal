@@ -296,6 +296,11 @@ export function evaluateSchedule(
     reasons.push('Contiene materias cuyos prerrequisitos aún no han sido aprobados.');
   }
 
+  // Validación de cantidad de materias solicitadas
+  if (schedule.length !== config.numberOfCourses) {
+    reasons.push("La cantidad de materias no coincide con la configuración solicitada.");
+  }
+
   // Validación proposicional pura (Paso 13)
   const isValid = validateSchedule(schedule, config);
   return {
