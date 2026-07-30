@@ -258,7 +258,7 @@ export function evaluateSchedule(
 ): EvaluationResult {
   const reasons: string[] = [];
 
-  // 1. Validar materias obligatorias (Paso 7)
+  // 1. Proposición O (Obligatorias)
   if (config.requiredCourses && config.requiredCourses.length > 0) {
     const courseNames = getCourseNameSet(schedule);
     const requiredSet = new Set(config.requiredCourses);
@@ -269,35 +269,65 @@ export function evaluateSchedule(
     }
   }
 
-  // 2. Validar cruces de horario (Paso 8)
+  // 2. Proposición C (Cruces de horario)
   if (config.avoidTimeConflicts && hasScheduleConflicts(schedule)) {
     reasons.push('Existen cruces o superposición de horarios entre materias.');
   }
 
-  // 3. Validar créditos máximos (Paso 9a)
+  // 3. Proposición R (Créditos máximos)
   if (!validateMaximumCredits(schedule, config.maximumCredits)) {
     const totalCredits = schedule.reduce((sum, c) => sum + c.credits, 0);
     reasons.push(`Supera el límite máximo de créditos (${totalCredits}/${config.maximumCredits}).`);
   }
 
-  // 4. Validar materias difíciles (Paso 9b)
+  // 4. Proposición D (Materias difíciles)
   if (!validateMaximumDifficulty(schedule, config.maximumDifficultCourses)) {
     const difficultCount = schedule.filter(c => c.difficulty === 'Avanzado').length;
     reasons.push(`Supera la cantidad máxima de materias difíciles/avanzadas (${difficultCount}/${config.maximumDifficultCourses}).`);
   }
 
-  // 5. Validar modalidad requerida (Paso 10)
+  // 5. Proposición M (Modalidad)
   if (!validateRequiredModality(schedule, config.requiredModality)) {
     reasons.push(`Una o más materias no coinciden con la modalidad solicitada (${config.requiredModality}).`);
   }
 
-  // 6. Validar prerrequisitos (Paso 11)
+  // 6. Proposición P (Prerrequisitos)
   if (config.validatePrerequisites && !validatePrerequisites(schedule, config.completedCourses, config.validatePrerequisites)) {
     reasons.push('Contiene materias cuyos prerrequisitos aún no han sido aprobados.');
   }
 
+  // Validación proposicional pura (Paso 13)
+  const isValid = validateSchedule(schedule, config);
   return {
-    valid: reasons.length === 0,
+    valid: isValid,
     reasons
   };
+}
+
+/**
+ * PASO 13: Construcción de la Regla Completa mediante Conjunción Lógica. 
+ * Expresión proposicional: T ∧ O ∧ C ∧ M ∧ D ∧ R ∧ P
+ * Retorna true únicamente si TODAS las proposiciones son VERDADERAS.
+ */
+
+export function validateSchedule(
+  schedule: Course[],
+  configuration: ScheduleConfiguration
+): boolean {
+  const courseSet = getCourseNameSet(schedule);
+
+  // Evaluamos cada proposición individual:
+  const T = schedule.length === configuration.numberOfCourses;
+  const O = includesRequiredCourses(courseSet, new Set(configuration.requiredCourses || []));
+  const C = !hasScheduleConflicts(schedule);
+  const M = validateRequiredModality(schedule, configuration.requiredModality);
+  const D = validateMaximumDifficulty(schedule, configuration.maximumDifficultCourses);
+  const R = validateMaximumCredits(schedule, configuration.maximumCredits);
+  const P = validatePrerequisites(
+    schedule,
+    configuration.completedCourses,
+    configuration.validatePrerequisites
+  );
+
+  return T && O && C && M && D && R && P;
 }
