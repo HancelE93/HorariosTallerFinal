@@ -12,7 +12,7 @@ export const generarHorarios = async (req: Request, res: Response) => {
   try {
     const config: ScheduleConfiguration = req.body;
 
-    // Se obtiene la lista de materias como conjutno universal ahora con prerequisitos
+    // 1. Obtener lista de materias del Conjunto Universal (PostgreSQL)
     const dbCourses = await prisma.courses.findMany({
       include: { prerequisites_prerequisites_course_idTocourses: true }
     });
@@ -34,26 +34,29 @@ export const generarHorarios = async (req: Request, res: Response) => {
 
     const totalCoursesInDb = dbCourses.length;
 
-    //  Validación de disponibilidad
+    // 2. Paso 3: Validación de disponibilidad
     if (config.numberOfCourses > totalCoursesInDb) {
       return res.status(400).json({
         error: `No existen suficientes materias disponibles en el sistema (${totalCoursesInDb}) para cumplir con la cantidad solicitada (${config.numberOfCourses}).`
       });
     }
 
+    // 3. Paso 4: Cálculo de combinaciones teóricas
     const totalCombinations = calculateCombinationCount(totalCoursesInDb, config.numberOfCourses);
 
+    // 4. Paso 5: Generar alternativas mediante algoritmo combinatorio
     const possibleCombinations = generateCombinations(courses, config.numberOfCourses);
 
     // se agrupan las condiciones: Materias obligatorias, cruce de horarios, creditos maximos, materias
     // dificiles/requeridas, virtual/presencial y prerequisitos / centrailizandole con evaluateSchedule:
 
+    // 5. Paso 12 y 14: Evaluar combinaciones una por una
     const evaluatedSchedules = possibleCombinations.map(schedule => ({
       schedule,
       evaluation: evaluateSchedule(schedule, config)
     }));
 
-    // Separar válidos e inválidos
+    // 6. Paso 15: Separar los resultados en Válidos y Descartados
     const validSchedules = evaluatedSchedules
       .filter(item => item.evaluation.valid)
       .map(item => item.schedule);
@@ -65,7 +68,6 @@ export const generarHorarios = async (req: Request, res: Response) => {
         reasons: item.evaluation.reasons
       }));
 
-    // Respuesta parcial de prueba
     return res.status(200).json({
       totalCourses: totalCoursesInDb,
       totalCombinations,
