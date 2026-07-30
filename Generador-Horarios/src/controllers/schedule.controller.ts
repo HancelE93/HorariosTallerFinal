@@ -50,31 +50,31 @@ export const generarHorarios = async (req: Request, res: Response) => {
     // se agrupan las condiciones: Materias obligatorias, cruce de horarios, creditos maximos, materias
     // dificiles/requeridas, virtual/presencial y prerequisitos / centrailizandole con evaluateSchedule:
 
-    // 5. Paso 12 y 14: Evaluar combinaciones una por una
-    const evaluatedSchedules = possibleCombinations.map(schedule => ({
-      schedule,
-      evaluation: evaluateSchedule(schedule, config)
-    }));
+    // 5. Paso 12, 14 y 16: Evaluar combinaciones y estructurar payload unificado
+    const schedules = possibleCombinations.map(schedule => {
+      const evaluation = evaluateSchedule(schedule, config);
+      const totalCredits = schedule.reduce((sum, course) => sum + course.credits, 0);
 
-    // 6. Paso 15: Separar los resultados en Válidos y Descartados
-    const validSchedules = evaluatedSchedules
-      .filter(item => item.evaluation.valid)
-      .map(item => item.schedule);
+      return {
+        courses: schedule,
+        totalCredits,
+        valid: evaluation.valid,
+        reasons: evaluation.reasons
+      };
+    });
 
-    const rejectedSchedules = evaluatedSchedules
-      .filter(item => !item.evaluation.valid)
-      .map(item => ({
-        schedule: item.schedule,
-        reasons: item.evaluation.reasons
-      }));
+    // Conteo de válidos y descartados
+    const validCount = schedules.filter(s => s.valid).length;
+    const discardedCount = schedules.filter(s => !s.valid).length;
 
+    // 6. Paso 16: Respuesta JSON principal del endpoint para seguir el formato del taller
     return res.status(200).json({
       totalCourses: totalCoursesInDb,
+      selectedAmount: config.numberOfCourses,
       totalCombinations,
-      validSchedulesCount: validSchedules.length,
-      rejectedSchedulesCount: rejectedSchedules.length,
-      validSchedules,
-      rejectedSchedules
+      validSchedules: validCount,
+      discardedSchedules: discardedCount,
+      schedules
     });
 
   } catch (error) {
