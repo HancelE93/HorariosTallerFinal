@@ -201,7 +201,9 @@ export function validateMaximumDifficulty(
 ): boolean {
 
   const difficultCourses = schedule.filter(
-    course => course.difficulty === "Avanzado"
+    course =>
+      course.difficulty === "Avanzado" ||
+      course.difficulty === "Alta"
   );
 
   return difficultCourses.length <= maximumDifficultCourses;
@@ -219,7 +221,7 @@ export function validateRequiredModality(
     return true;
   }
 
-  return schedule.every(
+  return schedule.some(
     course => course.modality === requiredModality
   );
 }
@@ -233,16 +235,20 @@ export function validatePrerequisites(
   completedCourses: number[] = [],
   shouldValidate: boolean = true
 ): boolean {
-  // Si la opción está desactivada, se asume válido
+
   if (!shouldValidate) {
     return true;
   }
 
-  const completedSet = new Set(completedCourses);
+  const availableCourses = new Set([
+    ...completedCourses,
+    ...schedule.map(course => course.id)
+  ]);
 
-  // Cada materia en el horario debe tener sus prerrequisitos aprobados
   return schedule.every(course =>
-    course.prerequisites.every(prereqId => completedSet.has(prereqId))
+    course.prerequisites.every(
+      prereqId => availableCourses.has(prereqId)
+    )
   );
 }
 

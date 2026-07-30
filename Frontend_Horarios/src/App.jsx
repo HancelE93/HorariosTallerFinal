@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GestionMaterias from "./pages/GestionMaterias";
+import ConfiguracionHorario from "./pages/ConfiguracionHorario";
 
 
-function App(){
 
-    return(
+function App() {
+
+    return (
 
         <BrowserRouter>
 
@@ -13,6 +15,10 @@ function App(){
                 <Route
                     path="/materias"
                     element={<GestionMaterias />}
+                />
+                <Route
+                    path="/"
+                    element={<ConfiguracionHorario />}
                 />
 
             </Routes>
