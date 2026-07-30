@@ -1,0 +1,336 @@
+.configuracion-container {
+
+    width: 550px;
+
+    margin: 40px auto;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.12);
+
+    border: 1px solid #e2e8f0;
+
+}
+
+
+/* Título principal */
+
+.configuracion-container h1 {
+
+    text-align: center;
+
+    color: #0f172a;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    margin-bottom: 35px;
+
+}
+
+
+
+/* Formulario */
+
+.configuracion-container form {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+
+
+/* Etiquetas */
+
+.configuracion-container label {
+
+    color:#334155;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+
+
+/* Inputs normales */
+
+.configuracion-container input[type="number"],
+.configuracion-container input[type="text"],
+.configuracion-container select {
+
+
+    width:100%;
+
+
+    padding:13px 15px;
+
+
+    border-radius:12px;
+
+
+    border:2px solid #cbd5e1;
+
+
+    background:#f8fafc;
+
+
+    color:#0f172a;
+
+
+    font-size:16px;
+
+
+    font-weight:500;
+
+
+    transition:all 0.3s ease;
+
+
+    box-sizing:border-box;
+
+}
+
+
+
+/* Para que los números siempre sean visibles */
+
+.configuracion-container input[type="number"] {
+
+    color:#111827;
+
+    background:#ffffff;
+
+}
+
+
+
+/* Cuando seleccionas */
+
+.configuracion-container input:focus,
+.configuracion-container select:focus {
+
+
+    outline:none;
+
+
+    border-color:#2563eb;
+
+
+    background:#ffffff;
+
+
+    box-shadow:
+
+    0 0 0 4px rgba(37,99,235,0.15);
+
+}
+
+
+
+/* Placeholder */
+
+.configuracion-container input::placeholder {
+
+    color:#94a3b8;
+
+}
+
+
+
+/* Select */
+
+.configuracion-container select {
+
+    cursor:pointer;
+
+}
+
+
+
+/* Bloques de checkbox */
+
+.configuracion-container label:has(input[type="checkbox"]) {
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
+    padding:12px;
+
+
+    background:#f1f5f9;
+
+
+    border-radius:12px;
+
+
+    color:#334155;
+
+
+    cursor:pointer;
+
+
+    transition:0.3s;
+
+
+}
+
+
+
+.configuracion-container label:has(input[type="checkbox"]):hover {
+
+
+    background:#e0f2fe;
+
+}
+
+
+
+/* Checkbox */
+
+.configuracion-container input[type="checkbox"] {
+
+
+    width:20px;
+
+
+    height:20px;
+
+
+    accent-color:#2563eb;
+
+
+    cursor:pointer;
+
+}
+
+
+
+/* Botón */
+
+.configuracion-container button {
+
+
+    margin-top:25px;
+
+
+    padding:15px;
+
+
+    border:none;
+
+
+    border-radius:14px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1e40af
+    );
+
+
+    color:white;
+
+
+    font-size:17px;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:all 0.3s ease;
+
+
+}
+
+
+
+/* Hover botón */
+
+.configuracion-container button:hover {
+
+
+    transform:translateY(-3px);
+
+
+    box-shadow:
+
+    0 10px 25px rgba(37,99,235,0.35);
+
+
+}
+
+
+
+/* Efecto al presionar */
+
+.configuracion-container button:active {
+
+
+    transform:scale(0.98);
+
+}
+
+
+
+/* Separación del resultado */
+
+.configuracion-container .resultado-container {
+
+
+    margin-top:35px;
+
+}
+
+
+
+/* Responsive */
+
+@media(max-width:650px){
+
+
+    .configuracion-container {
+
+
+        width:90%;
+
+
+        padding:25px;
+
+
+    }
+
+
+
+    .configuracion-container h1 {
+
+
+        font-size:24px;
+
+    }
+
+}

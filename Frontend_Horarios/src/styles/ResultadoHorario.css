@@ -1,0 +1,43 @@
+.resultado-container {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+
+.resultado-container h2 {
+    margin-bottom: 15px;
+}
+
+
+.horario-card {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: white;
+}
+
+
+.materia-card {
+    margin-top: 15px;
+    padding: 10px;
+    border-left: 4px solid #333;
+}
+
+
+.estado-valido {
+    color: green;
+    font-weight: bold;
+}
+
+
+.estado-invalido {
+    color: red;
+    font-weight: bold;
+}
+
+
+hr {
+    margin-top: 15px;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./../styles/ConfiguracionHorario.css";
 import { API_BASE_URL } from "../config/apiConfig";
+import ResultadoHorario from "../components/ResultadoHorario";
 
 function ConfiguracionHorario() {
 
@@ -138,118 +139,9 @@ function ConfiguracionHorario() {
 
                 {
                     resultado && (
-
-                        <div>
-
-                            <h2>Resultados</h2>
-
-                            <p>
-                                Materias disponibles:
-                                {resultado.totalCourses}
-                            </p>
-
-                            <p>
-                                Combinaciones posibles:
-                                {resultado.totalCombinations}
-                            </p>
-
-                            <p>
-                                Horarios válidos:
-                                {resultado.validSchedules}
-                            </p>
-
-                            <p>
-                                Horarios descartados:
-                                {resultado.discardedSchedules}
-                            </p>
-
-                            <h3>Detalle:</h3>
-
-                            {
-                                resultado.schedules?.map((horario, index) => (
-                                    <div key={index}>
-
-                                        <h4>
-                                            Horario {index + 1}
-                                        </h4>
-
-                                        <p>
-                                            Estado:
-                                            {horario.valid ? " Válido" : " Inválido"}
-                                        </p>
-
-                                        <p>
-                                            Razones:
-                                        </p>
-
-                                        <ul>
-                                            {
-                                                horario.reasons.map((razon, i) => (
-                                                    <li key={i}>
-                                                        {razon}
-                                                    </li>
-                                                ))
-                                            }
-                                        </ul>
-                                        <h4>Materias:</h4>
-
-                                        {
-                                            horario.courses.map((materia) => (
-
-                                                <div key={materia.id}>
-
-                                                    {
-                                                        console.log("HORA:", materia.startTime, materia.endTime)
-                                                    }
-
-                                                    <p>
-                                                        📘 {materia.name}
-                                                    </p>
-
-                                                    <p>
-                                                        Día: {materia.day}
-                                                    </p>
-
-                                                    <p>
-                                                        Horario:
-                                                        {new Date(materia.startTime).toLocaleTimeString([], {
-                                                            hour: "2-digit",
-                                                            minute: "2-digit"
-                                                        })}
-                                                        -
-                                                        {new Date(materia.endTime).toLocaleTimeString([], {
-                                                            hour: "2-digit",
-                                                            minute: "2-digit"
-                                                        })}
-                                                    </p>
-
-                                                    <p>
-                                                        Modalidad:
-                                                        {materia.modality}
-                                                    </p>
-
-                                                    <p>
-                                                        Créditos:
-                                                        {materia.credits}
-                                                    </p>
-
-                                                    <hr />
-
-                                                </div>
-
-                                            ))
-                                        }
-
-                                    </div>
-                                ))
-                            }
-
-                        </div>
-
+                        <ResultadoHorario resultado={resultado} />
                     )
                 }
-
-
             </form>
 
         </div>

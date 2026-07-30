@@ -1,0 +1,157 @@
+import "./../styles/ResultadoHorario.css";
+
+function ResultadoHorario({ resultado }) {
+
+    return (
+        <div className="resultado-container">
+
+            <h2>Resultados</h2>
+
+            <div className="resumen">
+
+                <p>
+                    Materias disponibles:
+                    {resultado.totalCourses}
+                </p>
+
+                <p>
+                    Combinaciones posibles:
+                    {resultado.totalCombinations}
+                </p>
+
+                <p>
+                    Horarios válidos:
+                    {resultado.validSchedules}
+                </p>
+
+                <p>
+                    Horarios descartados:
+                    {resultado.discardedSchedules}
+                </p>
+
+            </div>
+
+
+            <h3>Detalle:</h3>
+
+
+            {
+                resultado.schedules?.map((horario, index) => (
+
+                    <div 
+                        key={index}
+                        className="horario-card"
+                    >
+
+                        <h4>
+                            Horario {index + 1}
+                        </h4>
+
+
+                        <p 
+                            className={
+                                horario.valid 
+                                ? "estado-valido" 
+                                : "estado-invalido"
+                            }
+                        >
+                            Estado:
+                            {horario.valid ? " Válido" : " Inválido"}
+                        </p>
+
+
+                        <p>
+                            Razones:
+                        </p>
+
+
+                        <ul>
+
+                            {
+                                horario.reasons.map((razon, i) => (
+
+                                    <li key={i}>
+                                        {razon}
+                                    </li>
+
+                                ))
+                            }
+
+                        </ul>
+
+
+                        <h4>
+                            Materias:
+                        </h4>
+
+
+                        {
+                            horario.courses.map((materia) => (
+
+                                <div
+                                    key={materia.id}
+                                    className="materia-card"
+                                >
+
+                                    <h4>
+                                        📘 {materia.name}
+                                    </h4>
+
+
+                                    <p>
+                                        Día:
+                                        {materia.day}
+                                    </p>
+
+
+                                    <p>
+                                        Horario:
+                                        {
+                                            new Date(materia.startTime)
+                                            .toLocaleTimeString([], {
+                                                hour: "2-digit",
+                                                minute: "2-digit"
+                                            })
+                                        }
+
+                                        {" - "}
+
+                                        {
+                                            new Date(materia.endTime)
+                                            .toLocaleTimeString([], {
+                                                hour: "2-digit",
+                                                minute: "2-digit"
+                                            })
+                                        }
+                                    </p>
+
+
+                                    <p>
+                                        Modalidad:
+                                        {materia.modality}
+                                    </p>
+
+
+                                    <p>
+                                        Créditos:
+                                        {materia.credits}
+                                    </p>
+
+
+                                </div>
+
+                            ))
+                        }
+
+
+                    </div>
+
+                ))
+            }
+
+
+        </div>
+    );
+}
+
+export default ResultadoHorario;
