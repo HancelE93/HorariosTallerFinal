@@ -5,14 +5,7 @@ import {
   type Course,
   calculateCombinationCount,
   generateCombinations,
-  getCourseNameSet,
-  includesRequiredCourses,
-  hasScheduleConflicts,
-  filterValidSchedules,
-  validateMaximumCredits,
-  validateMaximumDifficulty,
-  validateRequiredModality,
-  validatePrerequisites
+  evaluateSchedule
 } from "../utils/scheduleGenerator.js";
 
 export const generarHorarios = async (req: Request, res: Response) => {
@@ -52,89 +45,34 @@ export const generarHorarios = async (req: Request, res: Response) => {
 
     const possibleCombinations = generateCombinations(courses, config.numberOfCourses);
 
-    // Convertir cada combinación en un conjunto (Set)
-    const scheduleSets = possibleCombinations.map(schedule =>
-      getCourseNameSet(schedule)
-    );
+    // se agrupan las condiciones: Materias obligatorias, cruce de horarios, creditos maximos, materias
+    // dificiles/requeridas, virtual/presencial y prerequisitos / centrailizandole con evaluateSchedule:
 
-    const requiredCoursesSet = new Set(config.requiredCourses);
+    const evaluatedSchedules = possibleCombinations.map(schedule => ({
+      schedule,
+      evaluation: evaluateSchedule(schedule, config)
+    }));
 
-    const validationResults = scheduleSets.map(scheduleSet =>
-      includesRequiredCourses(
-        scheduleSet,
-        requiredCoursesSet
-      )
-    );
+    // Separar válidos e inválidos
+    const validSchedules = evaluatedSchedules
+      .filter(item => item.evaluation.valid)
+      .map(item => item.schedule);
 
-    // Validar cruces de horario (Paso 8)
-    const conflictResults = possibleCombinations.map(schedule =>
-      hasScheduleConflicts(schedule)
-    );
-
-
-    // Validar créditos máximos
-    const creditResults = possibleCombinations.map(schedule =>
-      validateMaximumCredits(
-        schedule,
-        config.maximumCredits
-      )
-    );
-
-    // Validar cantidad máxima de materias difíciles
-    const difficultyResults = possibleCombinations.map(schedule =>
-      validateMaximumDifficulty(
-        schedule,
-        config.maximumDifficultCourses
-      )
-    );
-
-    // Validar modalidad requerida
-    const modalityResults = possibleCombinations.map(schedule =>
-      validateRequiredModality(
-        schedule,
-        config.requiredModality
-      )
-    );
-
-
-    const prerequisiteResults = possibleCombinations.map(schedule =>
-      validatePrerequisites(
-        schedule,
-        config.completedCourses,
-        config.validatePrerequisites
-      )
-    );
-
-    const validSchedules = filterValidSchedules(
-      possibleCombinations,
-      validationResults,
-      conflictResults,
-      creditResults,
-      difficultyResults,
-      modalityResults,
-      prerequisiteResults
-    );
-
+    const rejectedSchedules = evaluatedSchedules
+      .filter(item => !item.evaluation.valid)
+      .map(item => ({
+        schedule: item.schedule,
+        reasons: item.evaluation.reasons
+      }));
 
     // Respuesta parcial de prueba
     return res.status(200).json({
-
       totalCourses: totalCoursesInDb,
-
       totalCombinations,
-
+      validSchedulesCount: validSchedules.length,
+      rejectedSchedulesCount: rejectedSchedules.length,
       validSchedules,
-
-      validationResults,
-
-      conflictResults,
-
-      creditResults,
-
-      difficultyResults,
-
-      modalityResults
-
+      rejectedSchedules
     });
 
   } catch (error) {

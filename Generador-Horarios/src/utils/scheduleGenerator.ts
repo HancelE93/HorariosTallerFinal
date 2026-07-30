@@ -27,6 +27,12 @@ export interface ScheduleConfiguration {
   completedCourses?: number[]; // IDs de materias aprobadas previamente
 }
 
+// Muestra los resultado de un horario generado y la razon de su validez o invalidez
+export interface EvaluationResult {
+  valid: boolean;
+  reasons: string[];
+}
+
 // Aplica la fórmula C(n, r) = n! / (r! * (n - r)!) para calcular la cantidad teórica de combinaciones posibles 
 // de n elementos tomados de r en r. Devuelve 0 si r es menor que 0 o mayor que n.
 
@@ -238,4 +244,60 @@ export function validatePrerequisites(
   return schedule.every(course =>
     course.prerequisites.every(prereqId => completedSet.has(prereqId))
   );
+}
+
+/**
+ * De la interfaz o contrato establecido, se procede a evaluar cada condicion, validando si se cumple o no
+ * mostrando el motivo por lo cual no se cumpliria sea el caso en una lista de la misma.
+ * son 5 condiciones con funciones especificas, cruce, creditos, materias dificiles/requeridas y prerequisitos
+ */
+
+export function evaluateSchedule(
+  schedule: Course[],
+  config: ScheduleConfiguration
+): EvaluationResult {
+  const reasons: string[] = [];
+
+  // 1. Validar materias obligatorias (Paso 7)
+  if (config.requiredCourses && config.requiredCourses.length > 0) {
+    const courseNames = getCourseNameSet(schedule);
+    const requiredSet = new Set(config.requiredCourses);
+    const missingCourses = [...requiredSet].filter(name => !courseNames.has(name));
+
+    if (missingCourses.length > 0) {
+      reasons.push(`Faltan materias obligatorias: ${missingCourses.join(', ')}.`);
+    }
+  }
+
+  // 2. Validar cruces de horario (Paso 8)
+  if (config.avoidTimeConflicts && hasScheduleConflicts(schedule)) {
+    reasons.push('Existen cruces o superposición de horarios entre materias.');
+  }
+
+  // 3. Validar créditos máximos (Paso 9a)
+  if (!validateMaximumCredits(schedule, config.maximumCredits)) {
+    const totalCredits = schedule.reduce((sum, c) => sum + c.credits, 0);
+    reasons.push(`Supera el límite máximo de créditos (${totalCredits}/${config.maximumCredits}).`);
+  }
+
+  // 4. Validar materias difíciles (Paso 9b)
+  if (!validateMaximumDifficulty(schedule, config.maximumDifficultCourses)) {
+    const difficultCount = schedule.filter(c => c.difficulty === 'Avanzado').length;
+    reasons.push(`Supera la cantidad máxima de materias difíciles/avanzadas (${difficultCount}/${config.maximumDifficultCourses}).`);
+  }
+
+  // 5. Validar modalidad requerida (Paso 10)
+  if (!validateRequiredModality(schedule, config.requiredModality)) {
+    reasons.push(`Una o más materias no coinciden con la modalidad solicitada (${config.requiredModality}).`);
+  }
+
+  // 6. Validar prerrequisitos (Paso 11)
+  if (config.validatePrerequisites && !validatePrerequisites(schedule, config.completedCourses, config.validatePrerequisites)) {
+    reasons.push('Contiene materias cuyos prerrequisitos aún no han sido aprobados.');
+  }
+
+  return {
+    valid: reasons.length === 0,
+    reasons
+  };
 }
