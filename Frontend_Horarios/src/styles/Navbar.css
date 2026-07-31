@@ -1,3 +1,58 @@
 nav {
-    padding: 10px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    background: #1e293b;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+}
+
+
+
+nav a {
+
+    text-decoration: none;
+
+    color: white;
+
+    background: #334155;
+
+    padding: 12px 22px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+
+}
+
+
+
+nav a:hover {
+
+
+    background: #2563eb;
+
+    transform: translateY(-3px);
+
+}
+
+
+
+nav a:active {
+
+    transform: scale(0.95);
+
 }

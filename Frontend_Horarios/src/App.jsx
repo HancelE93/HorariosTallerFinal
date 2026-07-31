@@ -6,6 +6,7 @@ import ConfiguracionHorario from "./pages/ConfiguracionHorario";
 import Resultados from "./pages/Resultados";
 import DetalleHorario from "./pages/DetalleHorario";
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
 
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
             <Navbar />
 
             <Routes>
+
+                <Route path="/" element={<Home />} />
 
                 <Route path="/materias" element={<GestionMaterias />} />
 

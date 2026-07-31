@@ -4,7 +4,12 @@ import "../styles/Navbar.css";
 function Navbar() {
 
     return (
+
         <nav>
+
+            <Link to="/">
+                Inicio
+            </Link>
 
             <Link to="/materias">
                 Materias
@@ -23,6 +28,7 @@ function Navbar() {
             </Link>
 
         </nav>
+
     );
 
 }

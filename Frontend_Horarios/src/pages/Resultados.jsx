@@ -1,16 +1,16 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import ResultadoHorario from "../components/ResultadoHorario";
 import "../styles/Resultados.css";
 
 
 function Resultados() {
 
-
     const location = useLocation();
     const navigate = useNavigate();
 
 
-    const resultado = location.state;
+    const resultado =
+        location.state ||
+        JSON.parse(localStorage.getItem("ultimoHorario"));
 
 
 
@@ -31,14 +31,54 @@ function Resultados() {
                     <>
 
 
-                        <ResultadoHorario
-                            resultado={resultado}
-                        />
+                        <div className="resumen-resultados">
+
+
+                            <p>
+                                Materias disponibles:
+                                {" "}
+                                {resultado.totalCourses}
+                            </p>
+
+
+
+                            <p>
+                                Materias por horario:
+                                {" "}
+                                {resultado.selectedAmount}
+                            </p>
+
+
+
+                            <p>
+                                Combinaciones posibles:
+                                {" "}
+                                {resultado.totalCombinations}
+                            </p>
+
+
+
+                            <p>
+                                Horarios válidos:
+                                {" "}
+                                {resultado.validSchedules}
+                            </p>
+
+
+
+                            <p>
+                                Horarios descartados:
+                                {" "}
+                                {resultado.discardedSchedules}
+                            </p>
+
+
+                        </div>
 
 
 
                         <h2>
-                            Seleccionar horario
+                            Horarios generados
                         </h2>
 
 
@@ -47,7 +87,10 @@ function Resultados() {
                             resultado.schedules?.map((horario, index) => (
 
 
-                                <div key={index}>
+                                <div
+                                    key={index}
+                                    className="horario-card"
+                                >
 
 
                                     <h3>
@@ -58,30 +101,46 @@ function Resultados() {
 
                                     <p>
                                         Estado:
+
+                                        {" "}
+
                                         {
                                             horario.valid
-                                            ? " Válido"
-                                            : " Inválido"
+                                            ? "Válido"
+                                            : "Inválido"
                                         }
+
                                     </p>
 
 
 
                                     <button
-                                        onClick={() =>
+
+                                        onClick={() => {
+
+
+                                            localStorage.setItem(
+                                                "ultimoDetalleHorario",
+                                                JSON.stringify(horario)
+                                            );
+
+
                                             navigate(
                                                 "/detalle",
                                                 {
                                                     state: horario
                                                 }
-                                            )
-                                        }
+                                            );
+
+
+                                        }}
+
                                     >
-                                        Ver detalle Horario {index + 1}
+
+                                        Ver detalle
+
                                     </button>
 
-
-                                    <hr />
 
 
                                 </div>
@@ -91,11 +150,11 @@ function Resultados() {
                         }
 
 
+
                     </>
 
 
                 ) : (
-
 
                     <>
 
@@ -109,16 +168,16 @@ function Resultados() {
                         <button
                             onClick={() => navigate("/configuracion")}
                         >
+
                             Ir a configuración
+
                         </button>
 
 
                     </>
 
-
                 )
             }
-
 
 
         </div>

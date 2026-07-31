@@ -4,12 +4,13 @@ import "../styles/DetalleHorario.css";
 
 function DetalleHorario() {
 
-
     const location = useLocation();
     const navigate = useNavigate();
 
 
-    const horario = location.state;
+    const horario =
+        location.state ||
+        JSON.parse(localStorage.getItem("ultimoDetalleHorario"));
 
 
 
@@ -34,7 +35,7 @@ function DetalleHorario() {
                             horario.courses?.map((materia) => (
 
 
-                                <div 
+                                <div
                                     key={materia.id}
                                     className="dia-container"
                                 >
@@ -100,6 +101,20 @@ function DetalleHorario() {
                                         </p>
 
 
+
+                                        <p>
+
+                                            <strong>
+                                                Créditos:
+                                            </strong>
+
+                                            {" "}
+
+                                            {materia.credits}
+
+                                        </p>
+
+
                                     </div>
 
 
@@ -112,7 +127,9 @@ function DetalleHorario() {
 
 
                         <button className="btn-pdf">
+
                             Descargar PDF
+
                         </button>
 
 
@@ -120,7 +137,6 @@ function DetalleHorario() {
 
 
                 ) : (
-
 
                     <>
 
@@ -137,7 +153,6 @@ function DetalleHorario() {
 
 
                     </>
-
 
                 )
             }
