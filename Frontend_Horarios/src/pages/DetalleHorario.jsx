@@ -1,26 +1,154 @@
-function DetalleHorario(){
-
-    return(
-        <div>
-
-            <h1>Detalle del Horario</h1>
-
-            <h3>Lunes</h3>
-
-            <p>
-            08:00 - 10:00
-            Programación Web
-            Aula A101
-            </p>
+import { useLocation, useNavigate } from "react-router-dom";
+import "../styles/DetalleHorario.css";
 
 
-            <button>
-                Descargar PDF
-            </button>
+function DetalleHorario() {
+
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+
+    const horario = location.state;
+
+
+
+    return (
+
+        <div className="detalle-container">
+
+
+            <h1>
+                Detalle del Horario
+            </h1>
+
+
+
+            {
+                horario ? (
+
+                    <>
+
+
+                        {
+                            horario.courses?.map((materia) => (
+
+
+                                <div 
+                                    key={materia.id}
+                                    className="dia-container"
+                                >
+
+
+                                    <h2>
+                                        {materia.day}
+                                    </h2>
+
+
+
+                                    <div className="materia-detalle">
+
+
+                                        <h3>
+                                            📘 {materia.name}
+                                        </h3>
+
+
+
+                                        <p>
+
+                                            <strong>
+                                                Hora:
+                                            </strong>
+
+                                            {" "}
+
+                                            {
+                                                new Date(materia.startTime)
+                                                .toLocaleTimeString([], {
+                                                    hour: "2-digit",
+                                                    minute: "2-digit"
+                                                })
+                                            }
+
+
+                                            {" - "}
+
+
+                                            {
+                                                new Date(materia.endTime)
+                                                .toLocaleTimeString([], {
+                                                    hour: "2-digit",
+                                                    minute: "2-digit"
+                                                })
+                                            }
+
+                                        </p>
+
+
+
+                                        <p>
+
+                                            <strong>
+                                                Modalidad:
+                                            </strong>
+
+                                            {" "}
+
+                                            {materia.modality}
+
+                                        </p>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            ))
+                        }
+
+
+
+                        <button className="btn-pdf">
+                            Descargar PDF
+                        </button>
+
+
+                    </>
+
+
+                ) : (
+
+
+                    <>
+
+                        <p>
+                            No hay horario seleccionado.
+                        </p>
+
+
+                        <button
+                            onClick={() => navigate("/resultados")}
+                        >
+                            Volver a resultados
+                        </button>
+
+
+                    </>
+
+
+                )
+            }
+
+
 
         </div>
-    )
+
+    );
 
 }
+
 
 export default DetalleHorario;

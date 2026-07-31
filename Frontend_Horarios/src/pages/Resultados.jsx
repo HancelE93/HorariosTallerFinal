@@ -5,11 +5,9 @@ import "../styles/Resultados.css";
 
 function Resultados() {
 
+
     const location = useLocation();
     const navigate = useNavigate();
-
-
-    console.log("Datos recibidos:", location.state);
 
 
     const resultado = location.state;
@@ -26,21 +24,71 @@ function Resultados() {
             </h1>
 
 
+
             {
                 resultado ? (
 
                     <>
+
 
                         <ResultadoHorario
                             resultado={resultado}
                         />
 
 
-                        <button
-                            onClick={() => navigate("/detalle-horario")}
-                        >
-                            Ver detalle del horario
-                        </button>
+
+                        <h2>
+                            Seleccionar horario
+                        </h2>
+
+
+
+                        {
+                            resultado.schedules?.map((horario, index) => (
+
+
+                                <div key={index}>
+
+
+                                    <h3>
+                                        Horario {index + 1}
+                                    </h3>
+
+
+
+                                    <p>
+                                        Estado:
+                                        {
+                                            horario.valid
+                                            ? " Válido"
+                                            : " Inválido"
+                                        }
+                                    </p>
+
+
+
+                                    <button
+                                        onClick={() =>
+                                            navigate(
+                                                "/detalle",
+                                                {
+                                                    state: horario
+                                                }
+                                            )
+                                        }
+                                    >
+                                        Ver detalle Horario {index + 1}
+                                    </button>
+
+
+                                    <hr />
+
+
+                                </div>
+
+
+                            ))
+                        }
 
 
                     </>
@@ -48,15 +96,18 @@ function Resultados() {
 
                 ) : (
 
+
                     <>
+
 
                         <p>
                             No existe un horario generado todavía.
                         </p>
 
 
+
                         <button
-                            onClick={() => navigate("/")}
+                            onClick={() => navigate("/configuracion")}
                         >
                             Ir a configuración
                         </button>
@@ -64,8 +115,10 @@ function Resultados() {
 
                     </>
 
+
                 )
             }
+
 
 
         </div>
