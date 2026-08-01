@@ -93,14 +93,28 @@ export function getCourseNameSet(schedule: Course[]): Set<string> {
   );
 }
 
+// Extra: Función auxiliar para normalizar texto (quita tildes, convierte a minúsculas y limpia espacios)
+function normalizeText(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
 // Verifica que todas las materias obligatorias estén dentro del horario
 export function includesRequiredCourses(
   scheduleSet: Set<string>,
   requiredCoursesSet: Set<string>
 ): boolean {
 
-  return [...requiredCoursesSet].every(course =>
-    scheduleSet.has(course)
+  // Convertimos el conjunto del horario a nombres normalizados
+  const normalizedScheduleNames = new Set(
+    [...scheduleSet].map(name => normalizeText(name))
+  );
+
+  return [...requiredCoursesSet].every(required =>
+    normalizedScheduleNames.has(normalizeText(required))
   );
 
 }
