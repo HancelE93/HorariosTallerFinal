@@ -18,7 +18,7 @@ function DetalleHorario() {
 
         <div className="detalle-container">
 
-            {/* 👈 Título actualizado con el número de horario */}
+            {/* Título actualizado con el número de horario */}
             <h1>
                 Detalle del Horario {horario?.numeroHorario ? `# ${horario.numeroHorario}` : ""}
             </h1>
