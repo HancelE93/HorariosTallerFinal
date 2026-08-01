@@ -101,3 +101,174 @@
     justify-content: center;
     gap: 6px;
 }
+
+/* Grid interno alineado arriba */
+.bloques-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    align-items: stretch; /* Estira las tarjetas para que midan exactamente lo mismo */
+}
+
+/* Sub-bloques alineados desde arriba */
+.bloque-matematico-interno {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 👈 Alinea el título h4 desde el borde superior */
+    align-items: center;
+}
+
+.bloque-matematico-interno h4 {
+    font-size: 1rem;
+    color: #1e293b !important;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* Contenedor del gráfico y leyenda (uno debajo del otro) */
+.grafico-torta-container {
+    display: flex;
+    flex-direction: column; /* 👈 Coloca la leyenda DEBAJO de la gráfica */
+    align-items: center;    /* 👈 Centra la gráfica y la leyenda en el medio */
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.grafico-torta {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
+}
+
+/* Leyenda centrada debajo de la torta */
+.leyenda-torta {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Muestra válidos y descartados lado a lado o en columna */
+}
+
+.leyenda-torta p {
+    font-size: 0.88rem !important;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.verde { background-color: #10b981; }
+.dot.rojo { background-color: #ef4444; }
+
+/* Contenedor principal alineado horizontalmente en una sola línea */
+.resumen-horizontal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 30px;
+    padding: 12px 28px;
+    width: fit-content;
+    margin: 0 auto 30px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.item-resumen {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.resumen-icon {
+    font-size: 1.2rem;
+}
+
+.resumen-texto {
+    font-size: 0.95rem;
+    color: #334155;
+}
+
+.resumen-texto strong {
+    font-weight: 800;
+    color: #1e293b;
+    font-size: 1.05rem;
+    margin-left: 2px;
+}
+
+.separador {
+    color: #cbd5e1;
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+/* Contenedor destacado para la fórmula */
+.formula-destacada {
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    font-size: 1.25rem;
+    color: #1e293b;
+    background: #eef2ff; /* Color de fondo azul pastel suave */
+    border: 1px solid #c7d2fe;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 10px 0 14px 0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* Resaltado especial para el número total de combinaciones */
+.resultado-combinatoria {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #2563eb; /* Azul primario que resalta */
+}
+
+/* Texto explicativo debajo */
+.explicacion-matematica {
+    font-size: 0.9rem !important;
+    color: #475569 !important;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+
+.explicacion-matematica strong {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+/* Estilo para el texto de impacto superior (ej. "35 combinaciones") */
+.texto-impacto-combinaciones {
+    font-size: 0.95rem;
+    color: #475569;
+    font-weight: 600;
+    margin: 4px 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.texto-impacto-combinaciones .numero-grande {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #2563eb;
+}

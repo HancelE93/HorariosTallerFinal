@@ -16,42 +16,85 @@ function Resultados() {
         ? [...resultado.schedules].sort((a, b) => Number(b.valid) - Number(a.valid))
         : [];
 
+    const porcentajeValidos = resultado.totalCombinations > 0
+        ? ((resultado.validSchedules / resultado.totalCombinations) * 100).toFixed(1)
+        : 0;
+
     return (
 
         <div className="resultados-container">
             <h1>
-                Resultados de horarios generados
+                Resultados de Horarios Generados
             </h1>
 
             {
                 resultado ? (
                     <>
-                        <div className="resumen-resultados">
-                            <p>
-                                Materias disponibles: {resultado.totalCourses}
-                            </p>
+                        <div className="resumen-horizontal-container">
+                            <div className="item-resumen">
+                                <span className="resumen-icon">🌌</span>
+                                <span className="resumen-texto">
+                                    Materias Disponibles: <strong>{resultado.totalCourses}</strong>
+                                </span>
+                            </div>
 
-                            <p>
-                                Materias por horario: {resultado.selectedAmount}
-                            </p>
+                            <span className="separador">|</span>
 
-                            <p>
-                                Combinaciones posibles: {resultado.totalCombinations}
-                            </p>
-
-                            <p>
-                                Horarios válidos: {resultado.validSchedules}
-                            </p>
-
-                            <p>
-                                Horarios descartados: {resultado.discardedSchedules}
-                            </p>
-
+                            <div className="item-resumen">
+                                <span className="resumen-icon">📌</span>
+                                <span className="resumen-texto">
+                                    Materias Seleccionadas : <strong>{resultado.selectedAmount}</strong>
+                                </span>
+                            </div>
                         </div>
 
-                        <h2>
-                            Horarios generados
-                        </h2>
+                        <div className="matematicas-container-unificado">
+                            <h3>📐 Fundamento Matemático Aplicado (Análisis Global)</h3>
+
+                            <div className="bloques-grid">
+                                {/* Sub-bloque 1 */}
+                                <div className="bloque-matematico-interno">
+                                    <h4>1. Cálculo Combinatorio (Teoría de Conteo)</h4>
+
+                                    <div className="formula-destacada">
+                                        <span>C({resultado.totalCourses}, {resultado.selectedAmount}) = </span>
+                                        <strong className="resultado-combinatoria">{resultado.totalCombinations}</strong>
+                                    </div>
+
+                                    <p className="explicacion-matematica">
+                                        Representa el número de combinaciones posibles de horarios, seleccionando{" "}
+                                        <strong>{resultado.selectedAmount}</strong> materias a partir de{" "}
+                                        <strong>{resultado.totalCourses}</strong> materias disponibles sin importar el orden.
+                                    </p>
+                                </div>
+
+                                {/* Sub-bloque 2 */}
+                                <div className="bloque-matematico-interno">
+                                    <h4>2. Horarios Obtenidos</h4>
+                                    <div className="grafico-torta-container">
+                                        <div
+                                            className="grafico-torta"
+                                            style={{
+                                                background: `conic-gradient(#10b981 0% ${porcentajeValidos}%, #ef4444 ${porcentajeValidos}% 100%)`
+                                            }}
+                                        ></div>
+
+                                        <div className="leyenda-torta">
+                                            <p>
+                                                <span className="dot verde"></span>
+                                                <strong>Válidos:</strong> {porcentajeValidos}% ({resultado.validSchedules})
+                                            </p>
+                                            <p>
+                                                <span className="dot rojo"></span>
+                                                <strong>Descartados:</strong> {(100 - porcentajeValidos).toFixed(1)}% ({resultado.discardedSchedules})
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2> Detalle de Horarios Generados </h2>
 
                         {/* Renderizado de los horarios ordenados con los válidos primero y sus motivos de rechazo si no son válidos */}
 
