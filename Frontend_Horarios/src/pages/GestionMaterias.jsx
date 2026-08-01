@@ -19,6 +19,7 @@ function GestionMaterias() {
     const [modalidad, setModalidad] = useState("");
     const [dificultad, setDificultad] = useState("");
     const [creditos, setCreditos] = useState("");
+    const [prerrequisitos, setPrerrequisitos] = useState([]);
 
     const cargarMaterias = useCallback(async () => {
         try {
@@ -40,6 +41,19 @@ function GestionMaterias() {
         cargarMaterias();
     }, [cargarMaterias]);
 
+    const limpiarFormulario = () => {
+        setNombre("");
+        setDia("");
+        setHoraInicio("");
+        setHoraFin("");
+        setModalidad("");
+        setDificultad("");
+        setCreditos("");
+        setPrerrequisitos([]);
+        setEditando(false);
+        setIdEditar(null);
+    };
+
     const crearMateria = async (e) => {
         e.preventDefault();
 
@@ -52,7 +66,7 @@ function GestionMaterias() {
             !dificultad ||
             !creditos
         ) {
-            alert("Todos los campos son obligatorios");
+            alert("Todos los campos principales son obligatorios");
             return;
         }
 
@@ -63,7 +77,8 @@ function GestionMaterias() {
             end_time: horaFin,
             modality: modalidad,
             difficulty: dificultad,
-            credits: Number(creditos)
+            credits: Number(creditos),
+            prerequisites: prerrequisitos
         };
 
         try {
@@ -82,14 +97,7 @@ function GestionMaterias() {
 
             alert("Materia creada correctamente");
 
-            setNombre("");
-            setDia("");
-            setHoraInicio("");
-            setHoraFin("");
-            setModalidad("");
-            setDificultad("");
-            setCreditos("");
-
+            limpiarFormulario();
             setMostrarModal(false);
 
             cargarMaterias();
@@ -112,19 +120,19 @@ function GestionMaterias() {
             !dificultad ||
             !creditos
         ) {
-            alert("Todos los campos son obligatorios");
+            alert("Todos los campos principales son obligatorios");
             return;
         }
-        const materia = {
 
+        const materia = {
             name: nombre,
             day: dia,
             start_time: horaInicio,
             end_time: horaFin,
             modality: modalidad,
             difficulty: dificultad,
-            credits: Number(creditos)
-
+            credits: Number(creditos),
+            prerequisites: prerrequisitos
         };
 
         try {
@@ -147,16 +155,7 @@ function GestionMaterias() {
             alert("Materia actualizada correctamente");
 
             setMostrarModal(false);
-            setEditando(false);
-            setIdEditar(null);
-
-            setNombre("");
-            setDia("");
-            setHoraInicio("");
-            setHoraFin("");
-            setModalidad("");
-            setDificultad("");
-            setCreditos("");
+            limpiarFormulario();
 
             cargarMaterias();
 
@@ -193,6 +192,7 @@ function GestionMaterias() {
         setModalidad(materia.modality);
         setDificultad(materia.difficulty);
         setCreditos(materia.credits);
+        setPrerrequisitos(materia.prerequisites || []);
 
     };
 
@@ -216,7 +216,6 @@ function GestionMaterias() {
                 throw new Error("Error al eliminar materia");
             }
 
-
             alert("Materia eliminada correctamente");
 
             cargarMaterias();
@@ -226,6 +225,7 @@ function GestionMaterias() {
         }
 
     };
+
     return (
 
         <div className="contenedor">
@@ -244,7 +244,10 @@ function GestionMaterias() {
 
                 <button
                     className="btn-nueva"
-                    onClick={() => setMostrarModal(true)}
+                    onClick={() => {
+                        limpiarFormulario();
+                        setMostrarModal(true);
+                    }}
                 >
                     + Nueva Materia
                 </button>
@@ -342,6 +345,31 @@ function GestionMaterias() {
                                     onChange={(e) => setCreditos(e.target.value)}
                                 />
 
+                                <label>Prerrequisitos (Materias requeridas)</label>
+                                <select
+                                    multiple
+                                    value={prerrequisitos}
+                                    onChange={(e) => {
+                                        const seleccionados = Array.from(
+                                            e.target.selectedOptions,
+                                            (option) => Number(option.value)
+                                        );
+                                        setPrerrequisitos(seleccionados);
+                                    }}
+                                    style={{ height: "90px" }}
+                                >
+                                    {materias
+                                        .filter((m) => m.id !== idEditar)
+                                        .map((m) => (
+                                            <option key={m.id} value={m.id}>
+                                                {m.name}
+                                            </option>
+                                        ))}
+                                </select>
+                                <small style={{ color: "#64748b", fontSize: "0.78rem", marginBottom: "10px", display: "block" }}>
+                                    * Mantén presionado Ctrl (o Cmd) para seleccionar múltiples materias.
+                                </small>
+
                                 <div className="modal-botones">
 
                                     <button
@@ -354,7 +382,10 @@ function GestionMaterias() {
                                     <button
                                         className="btn-cancelar"
                                         type="button"
-                                        onClick={() => setMostrarModal(false)}
+                                        onClick={() => {
+                                            limpiarFormulario();
+                                            setMostrarModal(false);
+                                        }}
                                     >
                                         Cancelar
                                     </button>
