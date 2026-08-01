@@ -18,9 +18,9 @@ function DetalleHorario() {
 
         <div className="detalle-container">
 
-
+            {/* 👈 Título actualizado con el número de horario */}
             <h1>
-                Detalle del Horario
+                Detalle del Horario {horario?.numeroHorario ? `# ${horario.numeroHorario}` : ""}
             </h1>
 
 
@@ -66,10 +66,10 @@ function DetalleHorario() {
 
                                             {
                                                 new Date(materia.startTime)
-                                                .toLocaleTimeString([], {
-                                                    hour: "2-digit",
-                                                    minute: "2-digit"
-                                                })
+                                                    .toLocaleTimeString([], {
+                                                        hour: "2-digit",
+                                                        minute: "2-digit"
+                                                    })
                                             }
 
 
@@ -78,10 +78,10 @@ function DetalleHorario() {
 
                                             {
                                                 new Date(materia.endTime)
-                                                .toLocaleTimeString([], {
-                                                    hour: "2-digit",
-                                                    minute: "2-digit"
-                                                })
+                                                    .toLocaleTimeString([], {
+                                                        hour: "2-digit",
+                                                        minute: "2-digit"
+                                                    })
                                             }
 
                                         </p>

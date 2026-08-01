@@ -13,8 +13,8 @@ function Resultados() {
 
     // Ordenar los horarios para que los válidos aparezcan primero: 
     const horariosOrdenados = resultado?.schedules
-    ? [...resultado.schedules].sort((a, b) => Number(b.valid) - Number(a.valid))
-    : [];
+        ? [...resultado.schedules].sort((a, b) => Number(b.valid) - Number(a.valid))
+        : [];
 
     return (
 
@@ -54,7 +54,7 @@ function Resultados() {
                         </h2>
 
                         {/* Renderizado de los horarios ordenados con los válidos primero y sus motivos de rechazo si no son válidos */}
-                        
+
                         {horariosOrdenados.map((horario, index) => (
                             <div key={index} className="horario-card">
                                 <h3>
@@ -84,12 +84,17 @@ function Resultados() {
 
                                 <button
                                     onClick={() => {
+                                        const detalleConNumero = {
+                                            ...horario,
+                                            numeroHorario: index + 1
+                                        };
+
                                         localStorage.setItem(
                                             "ultimoDetalleHorario",
-                                            JSON.stringify(horario)
+                                            JSON.stringify(detalleConNumero)
                                         );
 
-                                        navigate("/detalle",{state: horario});
+                                        navigate("/detalle", { state: detalleConNumero });
                                     }}
                                 >
                                     Ver detalle
@@ -100,15 +105,15 @@ function Resultados() {
 
                 ) : (
                     <>
-                    <p>
-                        No existe un horario generado todavía.
-                    </p>
+                        <p>
+                            No existe un horario generado todavía.
+                        </p>
 
-                    <button onClick={() => navigate("/configuracion")}>
-                        Ir a configuración
-                    </button>
-                </>
-            )}
+                        <button onClick={() => navigate("/configuracion")}>
+                            Ir a configuración
+                        </button>
+                    </>
+                )}
         </div>
     );
 }

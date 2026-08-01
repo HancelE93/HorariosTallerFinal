@@ -1,18 +1,89 @@
 .resultados-container {
-    padding: 20px;
+    padding: 30px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    color: #1f2937; /* Color de texto oscuro para todo el contenedor */
 }
 
+/* Encabezado principal */
 .resultados-container h1 {
     text-align: center;
+    color: #111827 !important; /* Gris/Negro oscuro para máxima visibilidad */
+    font-size: 2rem;
+    margin-bottom: 25px;
+    font-weight: 700;
 }
 
-.resultados-container button {
+/* Subtítulos h2 y h3 */
+.resultados-container h2,
+.resultados-container h3,
+.resultados-container h4 {
+    color: #1f2937 !important;
     margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Bloque de resumen estadístico */
+.resumen-resultados,
+.resumen {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+/* Párrafos e información */
+.resultados-container p {
+    color: #374151 !important; /* Gris oscuro muy legible */
+    font-size: 1rem;
+    margin: 6px 0;
+}
+
+/* Tarjetas de horarios */
+.horario-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #2563eb;
+}
+
+/* Botón Ver Detalle */
+.resultados-container button {
+    margin-top: 15px;
     padding: 10px 20px;
     cursor: pointer;
+    background-color: #2563eb;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
 }
 
-/* Quitar viñetas (puntos negros) y alinear razones de descarte */
+.resultados-container button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Secciones teóricas del final */
+.matematicas-container {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.matematicas-container p,
+.matematicas-container li {
+    color: #4b5563 !important;
+}
+
 .razones-descarte ul,
 .horario-card ul {
     list-style: none !important;
