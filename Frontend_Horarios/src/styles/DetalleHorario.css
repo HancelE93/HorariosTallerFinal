@@ -75,3 +75,78 @@
     background: #15803d;
 
 }
+
+/* Contenedor del Fundamento Matemático en Detalle */
+.matematicas-detalle-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.matematicas-detalle-container h3 {
+    text-align: center;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+.bloque-matematico {
+    background: #f8fafc;
+    border-left: 4px solid #2563eb;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.bloque-matematico h4 {
+    margin-top: 0;
+    color: #1e293b;
+    font-size: 1rem;
+}
+
+.formula-logica, .formula-conjuntos {
+    font-family: monospace;
+    background: #e2e8f0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+/* Grid 3x2 de Proposiciones */
+.proposiciones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.item-proposicion {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.88rem;
+}
+
+/* Detalle de Obligatorias */
+.detalle-obligatorias {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.lista-obligatorias {
+    color: #2563eb;
+    font-weight: bold;
+}

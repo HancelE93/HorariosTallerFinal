@@ -1,18 +1,55 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/DetalleHorario.css";
 
-
 function DetalleHorario() {
-
     const location = useLocation();
     const navigate = useNavigate();
-
 
     const horario =
         location.state ||
         JSON.parse(localStorage.getItem("ultimoDetalleHorario"));
 
+    // Recuperamos el objeto global cargado previamente en localStorage
+    const resultadoGlobal = JSON.parse(localStorage.getItem("ultimoHorario")) || {};
 
+    // Evaluaciones proposicionales dinámicas basadas en los motivos de rechazo
+    const reasons = horario?.reasons || [];
+
+    // Evaluaciones lógicas (Si NO existe en los motivos, se cumplió la proposición = True)
+    const hasNoConflicts = !reasons.some(r => r.includes("cruces") || r.includes("superposición"));
+    const includesRequired = !reasons.some(r => r.includes("obligatorias"));
+    const creditsValid = !reasons.some(r => r.includes("créditos"));
+    const difficultyValid = !reasons.some(r => r.includes("difíciles"));
+    const modalityValid = !reasons.some(r => r.includes("modalidad"));
+    const prerequisitesValid = !reasons.some(r => r.includes("prerrequisitos"));
+
+    // 🎯 OBTENER NOMBRES DE MATERIAS OBLIGATORIAS (Una sola declaración limpia)
+    let requiredCoursesList = 
+        horario?.requiredCourses ||
+        horario?.config?.requiredCourses || 
+        resultadoGlobal?.config?.requiredCourses || 
+        resultadoGlobal?.requiredCourses || 
+        [];
+
+    // Si la lista está vacía, la leemos directamente del mensaje de rechazo del backend
+    if (requiredCoursesList.length === 0) {
+        const todosLosHorarios = resultadoGlobal?.schedules || [horario];
+        
+        for (const h of todosLosHorarios) {
+            const razon = h?.reasons?.find(r => typeof r === "string" && r.includes("Faltan materias obligatorias:"));
+            if (razon) {
+                const materiaExtraida = razon.replace("Faltan materias obligatorias:", "").replace(".", "").trim();
+                if (materiaExtraida) {
+                    requiredCoursesList = [materiaExtraida];
+                    break;
+                }
+            }
+        }
+    }
+
+    const nombresObligatorias = requiredCoursesList.length > 0
+        ? requiredCoursesList.join(", ")
+        : "";
 
     return (
 
@@ -23,6 +60,84 @@ function DetalleHorario() {
                 Detalle del Horario {horario?.numeroHorario ? `# ${horario.numeroHorario}` : ""}
             </h1>
 
+
+            <div className="matematicas-detalle-container">
+                <h3>🧮 Evaluación Lógico-Matemática del Horario #{horario?.numeroHorario || 1}</h3>
+
+                {/* Sub-bloque 1: Álgebra Proposicional */}
+                <div className="bloque-matematico">
+                    <h4>1. Álgebra Proposicional (Regla de Conjunción)</h4>
+
+                    <p className="formula-logica">
+                        <strong>Evaluación:</strong> C ∧ O ∧ R ∧ D ∧ M ∧ P ≡ {horario.valid ? "1 (VERDADERO)" : "0 (FALSO)"}
+                    </p>
+
+                    {/* Grid 3x2 para proposiciones */}
+                    <div className="proposiciones-grid">
+                        <div className="item-proposicion">
+                            <span className="estado-icon">{hasNoConflicts ? "✅" : "❌"}</span>
+                            <span><strong>C</strong> (Sin Cruces)</span>
+                        </div>
+
+                        <div className="item-proposicion">
+                            <span className="estado-icon">{includesRequired ? "✅" : "❌"}</span>
+                            <span><strong>O</strong> (Obligatorias)</span>
+                        </div>
+
+                        <div className="item-proposicion">
+                            <span className="estado-icon">{creditsValid ? "✅" : "❌"}</span>
+                            <span><strong>R</strong> (Límite Créditos)</span>
+                        </div>
+
+                        <div className="item-proposicion">
+                            <span className="estado-icon">{difficultyValid ? "✅" : "❌"}</span>
+                            <span><strong>D</strong> (Máx. Dificultad)</span>
+                        </div>
+
+                        <div className="item-proposicion">
+                            <span className="estado-icon">{modalityValid ? "✅" : "❌"}</span>
+                            <span><strong>M</strong> (Modalidad)</span>
+                        </div>
+
+                        <div className="item-proposicion">
+                            <span className="estado-icon">{prerequisitesValid ? "✅" : "❌"}</span>
+                            <span><strong>P</strong> (Prerrequisitos)</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Sub-bloque 2: Teoría de Conjuntos */}
+                <div className="bloque-matematico">
+                    <h4>2. Teoría de Conjuntos (Inclusión de Subconjuntos)</h4>
+
+                    <p className="formula-conjuntos">
+                        {"{ Materias Obligatorias } ⊆ { Materias de este Horario }"}
+                    </p>
+
+                    <div className="detalle-obligatorias">
+                        <p>
+                            <strong>Materias Obligatorias requeridas:</strong>{" "}
+                            {nombresObligatorias ? (
+                                <span className="lista-obligatorias">{nombresObligatorias}</span>
+                            ) : (
+                                <em>Ninguna marcada como obligatoria</em>
+                            )}
+                        </p>
+
+                        <p className="explicacion-matematica">
+                            {includesRequired ? (
+                                <span>
+                                    ✅ <strong>Se cumple la inclusión:</strong> Todas las materias obligatorias seleccionadas forman parte de este horario.
+                                </span>
+                            ) : (
+                                <span>
+                                    ❌ <strong>No se cumple la inclusión:</strong> El horario carece de una o más materias indispensables.
+                                </span>
+                            )}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
 
             {
