@@ -302,7 +302,7 @@ export function evaluateSchedule(
 
   // 4. Proposición D (Materias difíciles)
   if (!validateMaximumDifficulty(schedule, config.maximumDifficultCourses)) {
-    const difficultCount = schedule.filter(c => c.difficulty === 'Avanzado').length;
+    const difficultCount = schedule.filter(course => course.difficulty === "Avanzado" || course.difficulty === "Alta").length;
     reasons.push(`Supera la cantidad máxima de materias difíciles/avanzadas (${difficultCount}/${config.maximumDifficultCourses}).`);
   }
 

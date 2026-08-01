@@ -329,9 +329,9 @@ function GestionMaterias() {
                                     onChange={(e) => setDificultad(e.target.value)}
                                 >
                                     <option value="">Seleccione una dificultad</option>
-                                    <option value="Básico">Básico</option>
-                                    <option value="Intermedio">Intermedio</option>
-                                    <option value="Avanzado">Avanzado</option>
+                                    <option value="Baja">Baja</option>
+                                    <option value="Media">Media</option>
+                                    <option value="Alta">Alta</option>
                                 </select>
 
                                 <label>Créditos</label>
