@@ -11,3 +11,22 @@
     padding: 10px 20px;
     cursor: pointer;
 }
+
+/* Quitar viñetas (puntos negros) y alinear razones de descarte */
+.razones-descarte ul,
+.horario-card ul {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin: 10px 0;
+}
+
+.razones-descarte li,
+.horario-card li {
+    color: #c9302c !important;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}

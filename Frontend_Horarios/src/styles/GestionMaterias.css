@@ -87,30 +87,32 @@ body{
 
 }
 
-.modal input{
-
-    width:100%;
-    padding:12px;
-
-    border:1px solid #d1d5db;
-    border-radius:8px;
-
-    margin-bottom:15px;
-
-    font-size:15px;
-
-    transition:.3s;
-
+/* Inputs y Selects dentro del Modal */
+.modal input,
+.modal select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    background-color: #f9fafb !important;
+    color: #1f2937 !important;
+    transition: .3s;
 }
 
-.modal input:focus{
+.modal input:focus,
+.modal select:focus {
+    outline: none;
+    border-color: #2563eb;
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    box-shadow: 0 0 8px rgba(37, 99, 235, .25);
+}
 
-    outline:none;
-
-    border-color:#2563eb;
-
-    box-shadow:0 0 8px rgba(37,99,235,.25);
-
+.modal select option {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
 }
 
 .modal-botones{
