@@ -1,274 +1,930 @@
-.resultados-container {
-    padding: 30px 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-    color: #1f2937; /* Color de texto oscuro para todo el contenedor */
+/* =========================
+        CONTENEDOR PRINCIPAL
+========================= */
+
+.resultados-container{
+
+    width:100%;
+
+    min-height:100vh;
+
+    padding:40px;
+
+    box-sizing:border-box;
+
+    font-family:"Segoe UI", Arial, sans-serif;
+
+    background:linear-gradient(
+        135deg,
+        #f8fbff,
+        #eaf2ff
+    );
+
 }
 
-/* Encabezado principal */
-.resultados-container h1 {
-    text-align: center;
-    color: #111827 !important; /* Gris/Negro oscuro para máxima visibilidad */
-    font-size: 2rem;
-    margin-bottom: 25px;
-    font-weight: 700;
+
+
+/* =========================
+            TITULO
+========================= */
+
+
+.resultados-container h1{
+
+    text-align:center;
+
+    color:#2563eb !important;
+
+    font-size:2.5rem;
+
+    font-weight:800;
+
+    margin-bottom:35px;
+
 }
 
-/* Subtítulos h2 y h3 */
+
+
+
+
 .resultados-container h2,
 .resultados-container h3,
-.resultados-container h4 {
-    color: #1f2937 !important;
-    margin-top: 20px;
-    margin-bottom: 10px;
+.resultados-container h4{
+
+    color:#1d4ed8 !important;
+
 }
 
-/* Bloque de resumen estadístico */
-.resumen-resultados,
-.resumen {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+
+
+
+
+/* =========================
+        RESUMEN SUPERIOR
+========================= */
+
+
+.resumen-horizontal-container{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:25px;
+
+
+    flex-wrap:wrap;
+
+
+    margin-bottom:40px;
+
+
 }
 
-/* Párrafos e información */
-.resultados-container p {
-    color: #374151 !important; /* Gris oscuro muy legible */
-    font-size: 1rem;
-    margin: 6px 0;
+
+
+
+
+.item-resumen{
+
+
+    background:white;
+
+
+    padding:18px 30px;
+
+
+    border-radius:18px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
+    border-left:5px solid #2563eb;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.12);
+
+
+    transition:.35s;
+
+
 }
 
-/* Tarjetas de horarios */
-.horario-card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-left: 5px solid #2563eb;
+
+
+.item-resumen:hover{
+
+
+    transform:translateY(-5px);
+
+
 }
 
-/* Botón Ver Detalle */
-.resultados-container button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #2563eb;
-    color: #ffffff !important;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
+
+
+
+
+.resumen-icon{
+
+
+    font-size:25px;
+
+
 }
 
-.resultados-container button:hover {
-    background-color: #1d4ed8;
+
+
+
+
+.resumen-texto{
+
+
+    color:#475569;
+
+
 }
 
-/* Secciones teóricas del final */
-.matematicas-container {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 25px;
-    margin-top: 40px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+
+
+
+.resumen-texto strong{
+
+
+    color:#2563eb;
+
+
+    font-size:20px;
+
+
 }
 
-.matematicas-container p,
-.matematicas-container li {
-    color: #4b5563 !important;
+
+
+
+
+
+
+/* =========================
+        GRAFICO
+========================= */
+
+
+.bloques-grid{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:25px;
+
+
+    flex-wrap:wrap;
+
+
+    margin-bottom:50px;
+
+
 }
 
-.razones-descarte ul,
-.horario-card ul {
-    list-style: none !important;
-    padding-left: 0 !important;
-    margin: 10px 0;
+
+
+
+
+.bloque-matematico-interno{
+
+
+    width:300px;
+
+
+    background:white;
+
+
+    padding:25px;
+
+
+    border-radius:18px;
+
+
+    text-align:center;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.12);
+
+
 }
 
-.razones-descarte li,
-.horario-card li {
-    color: #c9302c !important;
-    font-size: 0.95rem;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+
+
+
+
+.bloque-matematico-interno:hover{
+
+
+    transform:translateY(-8px);
+
+
+    transition:.35s;
+
+
 }
 
-/* Grid interno alineado arriba */
-.bloques-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    align-items: stretch; /* Estira las tarjetas para que midan exactamente lo mismo */
+
+
+
+
+.grafico-torta-container{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    gap:15px;
+
+
 }
 
-/* Sub-bloques alineados desde arriba */
-.bloque-matematico-interno {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* 👈 Alinea el título h4 desde el borde superior */
-    align-items: center;
+
+
+
+
+.grafico-torta{
+
+
+    width:120px;
+
+
+    height:120px;
+
+
+    border-radius:50%;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.15);
+
+
 }
 
-.bloque-matematico-interno h4 {
-    font-size: 1rem;
-    color: #1e293b !important;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-weight: 700;
+
+
+
+
+.leyenda-torta{
+
+
+    display:flex;
+
+
+    gap:20px;
+
+
 }
 
-/* Contenedor del gráfico y leyenda (uno debajo del otro) */
-.grafico-torta-container {
-    display: flex;
-    flex-direction: column; /* 👈 Coloca la leyenda DEBAJO de la gráfica */
-    align-items: center;    /* 👈 Centra la gráfica y la leyenda en el medio */
-    justify-content: center;
-    gap: 15px;
-    width: 100%;
-    margin-top: 5px;
+
+
+
+
+.dot{
+
+
+    width:12px;
+
+
+    height:12px;
+
+
+    border-radius:50%;
+
+
+    display:inline-block;
+
+
 }
 
-.grafico-torta {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
-    flex-shrink: 0;
+
+
+.dot.verde{
+
+    background:#10b981;
+
 }
 
-/* Leyenda centrada debajo de la torta */
-.leyenda-torta {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* Muestra válidos y descartados lado a lado o en columna */
+
+
+.dot.rojo{
+
+    background:#ef4444;
+
 }
 
-.leyenda-torta p {
-    font-size: 0.88rem !important;
-    margin: 0 !important;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+
+
+
+
+
+
+/* =========================
+        DETALLE HORARIOS
+========================= */
+
+
+.detalles-horarios,
+.horarios-container{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:25px;
+
+
+    flex-wrap:wrap;
+
+
+    width:100%;
+
+
 }
 
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
+
+
+
+
+/* TITULO DETALLE HORARIOS */
+
+.detalles-horarios h2,
+.detalles-horarios h3,
+.horarios-container h2,
+.horarios-container h3{
+
+
+    width:100%;
+
+
+    text-align:center;
+
+
+    color:#2563eb !important;
+
+
+    margin-bottom:30px;
+
+
 }
 
-.dot.verde { background-color: #10b981; }
-.dot.rojo { background-color: #ef4444; }
 
-/* Contenedor principal alineado horizontalmente en una sola línea */
-.resumen-horizontal-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 30px;
-    padding: 12px 28px;
-    width: fit-content;
-    margin: 0 auto 30px auto;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+
+
+.horario-card{
+
+
+    width:260px;
+
+
+    min-height:220px;
+
+
+    background:white;
+
+
+    padding:30px;
+
+
+    border-radius:18px;
+
+
+    border-left:5px solid #2563eb;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.12);
+
+
+    transition:.35s;
+
+
+    cursor:pointer;
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
 }
 
-.item-resumen {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+
+
+
+
+.horario-card::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+
+    left:-100%;
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    background:linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(37,99,235,.15),
+
+        transparent
+
+    );
+
+
+    transition:.5s;
+
+
 }
 
-.resumen-icon {
-    font-size: 1.2rem;
+
+
+
+
+.horario-card:hover::before{
+
+
+    left:100%;
+
+
 }
 
-.resumen-texto {
-    font-size: 0.95rem;
-    color: #334155;
+
+
+
+
+.horario-card:hover{
+
+
+    transform:translateY(-10px);
+
+
+    box-shadow:
+
+    0 20px 40px rgba(37,99,235,.25);
+
+
 }
 
-.resumen-texto strong {
-    font-weight: 800;
-    color: #1e293b;
-    font-size: 1.05rem;
-    margin-left: 2px;
+
+
+
+
+.horario-card h3{
+
+
+    text-align:center;
+
+
+    color:#2563eb !important;
+
+
 }
 
-.separador {
-    color: #cbd5e1;
-    font-weight: 300;
-    font-size: 1.2rem;
+
+
+
+
+.horario-card ul{
+
+
+    list-style:none;
+
+
+    padding:0;
+
+
 }
 
-/* Contenedor destacado para la fórmula */
-.formula-destacada {
-    font-family: 'Fira Code', 'Courier New', Courier, monospace;
-    font-size: 1.25rem;
-    color: #1e293b;
-    background: #eef2ff; /* Color de fondo azul pastel suave */
-    border: 1px solid #c7d2fe;
-    padding: 10px 20px;
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin: 10px 0 14px 0;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+
+
+
+
+.horario-card li{
+
+
+    background:#f8fbff;
+
+
+    padding:10px;
+
+
+    margin-bottom:8px;
+
+
+    border-radius:10px;
+
+
 }
 
-/* Resaltado especial para el número total de combinaciones */
-.resultado-combinatoria {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #2563eb; /* Azul primario que resalta */
+
+
+
+
+
+
+/* =========================
+    FUNDAMENTO MATEMATICO
+========================= */
+
+
+.matematicas-container{
+
+
+    width:100%;
+
+
+    background:white;
+
+
+    padding:30px;
+
+
+    margin-top:40px;
+
+
+    border-radius:20px;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.12);
+
+
 }
 
-/* Texto explicativo debajo */
-.explicacion-matematica {
-    font-size: 0.9rem !important;
-    color: #475569 !important;
-    line-height: 1.5;
-    margin: 0;
-    text-align: center;
+
+
+
+.matematicas-container h2,
+.matematicas-container h3{
+
+
+    text-align:center !important;
+
+
+    width:100%;
+
+
+    color:#2563eb !important;
+
+
+    margin-bottom:30px;
+
+
 }
 
-.explicacion-matematica strong {
-    color: #0f172a;
-    font-weight: 700;
+
+
+
+
+.bloques-grid{
+
+
+    justify-content:center;
+
 }
 
-/* Estilo para el texto de impacto superior (ej. "35 combinaciones") */
-.texto-impacto-combinaciones {
-    font-size: 0.95rem;
-    color: #475569;
-    font-weight: 600;
-    margin: 4px 0 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+
+
+
+
+
+
+/* =========================
+        MATERIAS
+========================= */
+
+
+.materia-card{
+
+
+    background:#f8fbff;
+
+
+    padding:15px;
+
+
+    margin-top:15px;
+
+
+    border-radius:12px;
+
+
+    border-left:4px solid #2563eb;
+
+
 }
 
-.texto-impacto-combinaciones .numero-grande {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #2563eb;
+
+
+
+
+.estado-valido{
+
+
+    color:#10b981;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+.estado-invalido{
+
+
+    color:#ef4444;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+        FORMULAS
+========================= */
+
+
+.formula-destacada{
+
+
+    display:inline-flex;
+
+
+    padding:12px 25px;
+
+
+    background:#eef2ff;
+
+
+    border-radius:12px;
+
+
+    color:#1e3a8a;
+
+
+    font-size:20px;
+
+
+}
+
+
+
+
+
+.resultado-combinatoria{
+
+
+    color:#2563eb;
+
+
+    font-size:25px;
+
+
+    font-weight:800;
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+        BOTONES
+========================= */
+
+
+.resultados-container button{
+
+
+    background:#2563eb;
+
+
+    color:white !important;
+
+
+    border:none;
+
+
+    padding:12px 25px;
+
+
+    border-radius:12px;
+
+
+    cursor:pointer;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+.resultados-container button:hover{
+
+
+    background:#1d4ed8;
+
+
+}
+
+
+
+/* =========================
+   TITULOS CENTRADOS RESULTADOS
+========================= */
+
+
+/* Fundamento Matemático */
+
+.matematicas-container-unificado h3{
+
+    width:100%;
+
+    text-align:center !important;
+
+    color:#2563eb !important;
+
+    margin-bottom:30px;
+
+}
+
+
+
+
+/* Detalle de Horarios Generados */
+
+.resultados-container > h2{
+
+    width:100%;
+
+    text-align:center !important;
+
+    color:#2563eb !important;
+
+    font-size:28px;
+
+    font-weight:800;
+
+    margin-top:40px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+/* =========================
+        RESPONSIVE
+========================= */
+
+
+@media(max-width:900px){
+
+
+    .resultados-container{
+
+
+        padding:20px;
+
+
+    }
+
+
+}
+
+
+
+
+@media(max-width:600px){
+
+
+    .horario-card{
+
+
+        width:100%;
+
+
+    }
+
+
+}
+
+
+
+
+/* =========================
+        RESPONSIVE
+========================= */
+
+
+@media(max-width:900px){
+
+
+    .resultados-container{
+
+
+        padding:20px;
+
+
+    }
+
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+
+    .horario-card{
+
+
+        width:100%;
+
+
+    }
+
+
+
 }

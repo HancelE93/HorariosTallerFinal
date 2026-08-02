@@ -13,24 +13,21 @@ function Home() {
 
 
                 <h1>
-                    Generador Inteligente de Horarios Académicos
+                    Bienvenido
                 </h1>
 
-
                 <p>
-                    Sistema web que permite generar horarios académicos
-                    aplicando conceptos de Matemáticas Discretas como
-                    conjuntos, lógica proposicional y combinatoria.
+                    Generador Inteligente de Horarios Académicos.
+                    Administra materias, configura restricciones
+                    y genera horarios aplicando conceptos de
+                    Matemáticas Discretas.
                 </p>
 
+                <h3 className="inicio-texto">
+                    🚀 Comienza registrando tus materias.
+                </h3>
 
 
-                <Link
-                    to="/configuracion"
-                    className="btn-comenzar"
-                >
-                    Comenzar
-                </Link>
 
 
             </div>
