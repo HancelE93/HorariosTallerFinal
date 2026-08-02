@@ -159,19 +159,19 @@ function DetalleHorario() {
                                             <p>
                                                 <strong>Hora:</strong>{" "}
                                                 {
-                                                    new Date(materia.startTime)
-                                                        .toLocaleTimeString([], {
-                                                            hour: "2-digit",
-                                                            minute: "2-digit"
-                                                        })
+                                                    new Date(materia.startTime).toLocaleTimeString([], {
+                                                        hour: "2-digit",
+                                                        minute: "2-digit",
+                                                        timeZone: "UTC"
+                                                    })
                                                 }
                                                 {" - "}
                                                 {
-                                                    new Date(materia.endTime)
-                                                        .toLocaleTimeString([], {
-                                                            hour: "2-digit",
-                                                            minute: "2-digit"
-                                                        })
+                                                    new Date(materia.endTime).toLocaleTimeString([], {
+                                                        hour: "2-digit",
+                                                        minute: "2-digit",
+                                                        timeZone: "UTC"
+                                                    })
                                                 }
                                             </p>
 
