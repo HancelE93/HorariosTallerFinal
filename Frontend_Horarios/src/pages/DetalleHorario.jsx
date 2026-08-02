@@ -59,6 +59,31 @@ function DetalleHorario() {
                 Detalle del Horario {horario?.numeroHorario ? `# ${horario.numeroHorario}` : ""}
             </h1>
 
+            {/* ESTADO GLOBAL Y RAZONES DE DESCARTE (EXIGIDO EN PANTALLA 4) */}
+            {horario && (
+                <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                    <p style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                        Estado:{" "}
+                        <span className={horario.valid ? "estado-valido" : "estado-invalido"}>
+                            {horario.valid ? "✅ Válido" : "❌ Inválido"}
+                        </span>
+                    </p>
+
+                    {!horario.valid && reasons.length > 0 && (
+                        <div className="razones-descarte" style={{ maxWidth: "600px", margin: "15px auto", padding: "12px", backgroundColor: "#fef2f2", borderRadius: "10px", border: "1px solid #fca5a5" }}>
+                            <p style={{ color: "#dc2626", fontWeight: "bold", marginBottom: "8px" }}>
+                                ⚠️ Motivos de rechazo:
+                            </p>
+                            <ul style={{ textAlign: "left", display: "inline-block", color: "#991b1b" }}>
+                                {reasons.map((razon, i) => (
+                                    <li key={i}>{razon}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            )}
+
             <div className="matematicas-detalle-container">
                 <h3>🧮 Evaluación Lógico-Matemática del Horario #{horario?.numeroHorario || 1}</h3>
 
@@ -178,6 +203,11 @@ function DetalleHorario() {
                                             <p>
                                                 <strong>Modalidad:</strong>{" "}
                                                 {materia.modality}
+                                            </p>
+
+                                            <p>
+                                                <strong>Dificultad:</strong>{" "}
+                                                {materia.difficulty || "Media"}
                                             </p>
 
                                             <p>

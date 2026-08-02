@@ -44,7 +44,7 @@ function Resultados() {
                         <div className="item-resumen">
                             <span className="resumen-icon">📌</span>
                             <span className="resumen-texto">
-                                Materias Seleccionadas: <strong>{resultado.selectedAmount}</strong>
+                                Materias por Horario: <strong>{resultado.selectedAmount}</strong>
                             </span>
                         </div>
                     </div>
