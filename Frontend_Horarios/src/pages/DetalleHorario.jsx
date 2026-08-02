@@ -23,7 +23,7 @@ function DetalleHorario() {
     const modalityValid = !reasons.some(r => r.includes("modalidad"));
     const prerequisitesValid = !reasons.some(r => r.includes("prerrequisitos"));
 
-    // 🎯 OBTENER NOMBRES DE MATERIAS OBLIGATORIAS (Una sola declaración limpia)
+    // OBTENER NOMBRES DE MATERIAS OBLIGATORIAS
     let requiredCoursesList =
         horario?.requiredCourses ||
         horario?.config?.requiredCourses ||
@@ -31,7 +31,6 @@ function DetalleHorario() {
         resultadoGlobal?.requiredCourses ||
         [];
 
-    // Si la lista está vacía, la leemos directamente del mensaje de rechazo del backend
     if (requiredCoursesList.length === 0) {
         const todosLosHorarios = resultadoGlobal?.schedules || [horario];
 
@@ -55,11 +54,10 @@ function DetalleHorario() {
 
         <div className="detalle-container">
 
-            {/* Título actualizado con el número de horario */}
+            {/* Título con el número de horario */}
             <h1>
                 Detalle del Horario {horario?.numeroHorario ? `# ${horario.numeroHorario}` : ""}
             </h1>
-
 
             <div className="matematicas-detalle-container">
                 <h3>🧮 Evaluación Lógico-Matemática del Horario #{horario?.numeroHorario || 1}</h3>
@@ -69,10 +67,9 @@ function DetalleHorario() {
                     <h4>1. Álgebra Proposicional (Regla de Conjunción)</h4>
 
                     <p className="formula-logica">
-                        <strong>Evaluación:</strong> C ∧ O ∧ R ∧ D ∧ M ∧ P ≡ {horario.valid ? "1 (VERDADERO)" : "0 (FALSO)"}
+                        <strong>Evaluación:</strong> C ∧ O ∧ R ∧ D ∧ M ∧ P ≡ {horario?.valid ? "1 (VERDADERO)" : "0 (FALSO)"}
                     </p>
 
-                    {/* Grid 3x2 para proposiciones */}
                     <div className="proposiciones-grid">
                         <div className="item-proposicion">
                             <span className="estado-icon">{hasNoConflicts ? "✅" : "❌"}</span>
@@ -139,29 +136,22 @@ function DetalleHorario() {
                 </div>
             </div>
 
-
             {
                 horario ? (
 
                     <>
-
-
                         <div className="dias-container">
-
                             {
                                 horario.courses?.map((materia) => (
-
                                     <div
                                         key={materia.id}
                                         className="dia-container"
                                     >
-
                                         <h2>
                                             {materia.day}
                                         </h2>
 
                                         <div className="materia-detalle">
-
                                             <h3>
                                                 📘 {materia.name}
                                             </h3>
@@ -175,9 +165,7 @@ function DetalleHorario() {
                                                             minute: "2-digit"
                                                         })
                                                 }
-
                                                 {" - "}
-
                                                 {
                                                     new Date(materia.endTime)
                                                         .toLocaleTimeString([], {
@@ -196,56 +184,55 @@ function DetalleHorario() {
                                                 <strong>Créditos:</strong>{" "}
                                                 {materia.credits}
                                             </p>
-
                                         </div>
-
                                     </div>
-
                                 ))
                             }
-
                         </div>
 
-
-
-                        <button className="btn-pdf">
-
-                            Descargar PDF
-
-                        </button>
-
-
+                        {/* BOTÓN ÚNICO DE ACCIÓN (VOLVER A RESULTADOS) */}
+                        <div style={{ textAlign: "center", marginTop: "25px" }}>
+                            <button
+                                className="btn-volver"
+                                onClick={() => navigate("/resultados")}
+                                style={{
+                                    backgroundColor: "#2563eb",
+                                    color: "white",
+                                    padding: "12px 28px",
+                                    borderRadius: "10px",
+                                    border: "none",
+                                    fontWeight: "bold",
+                                    fontSize: "1rem",
+                                    cursor: "pointer",
+                                    boxShadow: "0 4px 12px rgba(37, 99, 235, 0.2)"
+                                }}
+                            >
+                                ⬅️ Volver a Resultados
+                            </button>
+                        </div>
                     </>
-
 
                 ) : (
 
                     <>
-
                         <p>
                             No hay horario seleccionado.
                         </p>
-
 
                         <button
                             onClick={() => navigate("/resultados")}
                         >
                             Volver a resultados
                         </button>
-
-
                     </>
 
                 )
             }
-
-
 
         </div>
 
     );
 
 }
-
 
 export default DetalleHorario;

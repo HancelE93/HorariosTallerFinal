@@ -23,10 +23,6 @@ function Navbar() {
                 Resultados
             </Link>
 
-            <Link to="/detalle">
-                Detalle Horario
-            </Link>
-
         </nav>
 
     );
