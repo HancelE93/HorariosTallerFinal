@@ -232,3 +232,32 @@ label {
     box-shadow: 0 0 8px rgba(37, 99, 235, .25);
 
 }
+
+/* Fondo del modal (Overlay que cubre toda la pantalla) */
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.65); /* Fondo oscuro semitransparente */
+    backdrop-filter: blur(4px); /* Efecto difuminado elegante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999 !important; /* 👈 ¡CLAVE! Se sobrepone al Navbar */
+    padding: 20px;
+}
+
+/* Tarjeta contenedora del Formulario Modal */
+.modal {
+    background: #ffffff;
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh; /* Para evitar que desborde verticalmente */
+    overflow-y: auto; /* Permite scroll interno si el modal es muy alto */
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    z-index: 10000 !important;
+}

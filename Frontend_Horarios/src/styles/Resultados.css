@@ -3,928 +3,357 @@
 ========================= */
 
 .resultados-container {
-
     width: 100%;
-
     min-height: 100vh;
-
     padding: 40px;
-
     box-sizing: border-box;
-
     font-family: "Segoe UI", Arial, sans-serif;
-
-    background: linear-gradient(to top,
-            #3b82f6 0%,
-            #60a5fa 20%,
-            #93c5fd 40%,
-            #bfdbfe 60%,
-            #dbeafe 80%,
-            #ffffff 100%);
-
-    animation: aparecer .8s ease;
-
+    background: linear-gradient(
+        to top,
+        #3b82f6 0%,
+        #60a5fa 20%,
+        #93c5fd 40%,
+        #bfdbfe 60%,
+        #dbeafe 80%,
+        #ffffff 100%
+    );
+    animation: aparecer 0.8s ease;
 }
-
-
 
 /* =========================
             TITULO
 ========================= */
 
-
 .resultados-container h1 {
-
     text-align: center;
-
     color: #2563eb !important;
-
     font-size: 2.5rem;
-
     font-weight: 800;
-
     margin-bottom: 35px;
-
 }
-
-
-
-
 
 .resultados-container h2,
 .resultados-container h3,
 .resultados-container h4 {
-
     color: #1d4ed8 !important;
-
 }
-
-
-
-
 
 /* =========================
         RESUMEN SUPERIOR
 ========================= */
 
-
 .resumen-horizontal-container {
-
-
     display: flex;
-
-
     justify-content: center;
-
-
     align-items: center;
-
-
     gap: 25px;
-
-
     flex-wrap: wrap;
-
-
     margin-bottom: 40px;
-
-
 }
-
-
-
-
 
 .item-resumen {
-
-
     background: white;
-
-
     padding: 18px 30px;
-
-
     border-radius: 18px;
-
-
     display: flex;
-
-
     align-items: center;
-
-
     gap: 12px;
-
-
     border-left: 5px solid #2563eb;
-
-
-    box-shadow:
-
-        0 10px 25px rgba(0, 0, 0, .12);
-
-
-    transition: .35s;
-
-
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transition: 0.35s;
 }
-
-
 
 .item-resumen:hover {
-
-
     transform: translateY(-5px);
-
-
 }
-
-
-
-
 
 .resumen-icon {
-
-
     font-size: 25px;
-
-
 }
-
-
-
-
 
 .resumen-texto {
-
-
     color: #475569;
-
-
 }
-
-
-
-
 
 .resumen-texto strong {
-
-
     color: #2563eb;
-
-
     font-size: 20px;
-
-
 }
-
-
-
-
-
-
 
 /* =========================
         GRAFICO
 ========================= */
 
-
 .bloques-grid {
-
-
     display: flex;
-
-
     justify-content: center;
-
-
     align-items: center;
-
-
     gap: 25px;
-
-
     flex-wrap: wrap;
-
-
     margin-bottom: 50px;
-
-
 }
-
-
-
-
 
 .bloque-matematico-interno {
-
-
     width: 300px;
-
-
     background: white;
-
-
     padding: 25px;
-
-
     border-radius: 18px;
-
-
     text-align: center;
-
-
-    box-shadow:
-
-        0 10px 25px rgba(0, 0, 0, .12);
-
-
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
-
-
-
-
 
 .bloque-matematico-interno:hover {
-
-
     transform: translateY(-8px);
-
-
-    transition: .35s;
-
-
+    transition: 0.35s;
 }
-
-
-
-
 
 .grafico-torta-container {
-
-
     display: flex;
-
-
     flex-direction: column;
-
-
     align-items: center;
-
-
     gap: 15px;
-
-
 }
-
-
-
-
 
 .grafico-torta {
-
-
     width: 120px;
-
-
     height: 120px;
-
-
     border-radius: 50%;
-
-
-    box-shadow:
-
-        0 10px 25px rgba(0, 0, 0, .15);
-
-
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
-
-
-
-
 
 .leyenda-torta {
-
-
     display: flex;
-
-
     gap: 20px;
-
-
 }
-
-
-
-
 
 .dot {
-
-
     width: 12px;
-
-
     height: 12px;
-
-
     border-radius: 50%;
-
-
     display: inline-block;
-
-
 }
-
-
 
 .dot.verde {
-
     background: #10b981;
-
 }
-
-
 
 .dot.rojo {
-
     background: #ef4444;
-
 }
 
-
-
-
-
-
-
 /* =========================
-        DETALLE HORARIOS
+    DETALLE HORARIOS (UNIFORME Y SIMÉTRICO)
 ========================= */
-
 
 .detalles-horarios,
 .horarios-container {
-
-
     display: flex;
-
-
     justify-content: center;
-
-
-    align-items: center;
-
-
+    align-items: stretch; /* 👈 Hace que todas las tarjetas de la misma fila midan lo mismo */
     gap: 25px;
-
-
     flex-wrap: wrap;
-
-
     width: 100%;
-
-
 }
-
-
-
-
-
-/* TITULO DETALLE HORARIOS */
-
-.detalles-horarios h2,
-.detalles-horarios h3,
-.horarios-container h2,
-.horarios-container h3 {
-
-
-    width: 100%;
-
-
-    text-align: center;
-
-
-    color: #2563eb !important;
-
-
-    margin-bottom: 30px;
-
-
-}
-
-
-
-
 
 .horario-card {
-
-
-    width: 260px;
-
-
-    min-height: 220px;
-
-
+    width: 280px;
+    min-height: 300px; /* 👈 Tamaño estándar uniforme */
     background: white;
-
-
-    padding: 30px;
-
-
+    padding: 25px;
     border-radius: 18px;
-
-
     border-left: 5px solid #2563eb;
-
-
-    box-shadow:
-
-        0 10px 25px rgba(0, 0, 0, .12);
-
-
-    transition: .35s;
-
-
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
     cursor: pointer;
-
-
     position: relative;
-
-
     overflow: hidden;
-
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 👈 Garantiza que el botón quede SIEMPRE pegado abajo */
 }
-
-
-
-
 
 .horario-card::before {
-
-
     content: "";
-
-
     position: absolute;
-
-
     top: 0;
-
-
     left: -100%;
-
-
     width: 100%;
-
-
     height: 100%;
-
-
-    background: linear-gradient(120deg,
-
-            transparent,
-
-            rgba(37, 99, 235, .15),
-
-            transparent);
-
-
-    transition: .5s;
-
-
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(37, 99, 235, 0.15),
+        transparent
+    );
+    transition: 0.5s;
 }
-
-
-
-
 
 .horario-card:hover::before {
-
-
     left: 100%;
-
-
 }
-
-
-
-
 
 .horario-card:hover {
-
-
-    transform: translateY(-10px);
-
-
-    box-shadow:
-
-        0 20px 40px rgba(37, 99, 235, .25);
-
-
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.25);
 }
-
-
-
-
 
 .horario-card h3 {
-
-
     text-align: center;
-
-
     color: #2563eb !important;
-
-
+    margin-bottom: 12px;
 }
 
+/* Contenedor con SCROLL para los motivos de rechazo */
+.razones-descarte {
+    background-color: #fef2f2;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 10px 0;
+    max-height: 120px; /* 👈 Limita la altura para que no deforme la tarjeta */
+    overflow-y: auto; /* 👈 Agrega scroll suave si hay muchas razones */
+    flex-grow: 1;
+}
 
-
-
-
-.horario-card ul {
-
-
+.razones-descarte ul {
     list-style: none;
-
-
     padding: 0;
-
-
+    margin: 0;
 }
 
-
-
-
-
-.horario-card li {
-
-
-    background: #f8fbff;
-
-
-    padding: 10px;
-
-
-    margin-bottom: 8px;
-
-
-    border-radius: 10px;
-
-
+.razones-descarte li {
+    background: #ffffff;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #991b1b;
+    border-left: 3px solid #ef4444;
 }
 
-
-
-
-
-
+/* Botones fijados abajo */
+.horario-card button {
+    margin-top: auto; /* 👈 Alineación perfecta abajo */
+    width: 100%;
+}
 
 /* =========================
     FUNDAMENTO MATEMATICO
 ========================= */
 
-
 .matematicas-container {
-
-
     width: 100%;
-
-
     background: white;
-
-
     padding: 30px;
-
-
     margin-top: 40px;
-
-
     border-radius: 20px;
-
-
-    box-shadow:
-
-        0 10px 25px rgba(0, 0, 0, .12);
-
-
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
-
-
-
 
 .matematicas-container h2,
 .matematicas-container h3 {
-
-
     text-align: center !important;
-
-
     width: 100%;
-
-
     color: #2563eb !important;
-
-
     margin-bottom: 30px;
-
-
 }
-
-
-
-
-
-.bloques-grid {
-
-
-    justify-content: center;
-
-}
-
-
-
-
-
-
 
 /* =========================
         MATERIAS
 ========================= */
 
-
 .materia-card {
-
-
     background: #f8fbff;
-
-
     padding: 15px;
-
-
     margin-top: 15px;
-
-
     border-radius: 12px;
-
-
     border-left: 4px solid #2563eb;
-
-
 }
-
-
-
-
 
 .estado-valido {
-
-
     color: #10b981;
-
-
     font-weight: bold;
-
-
+    text-align: center;
+    margin-bottom: 8px;
 }
-
-
-
-
 
 .estado-invalido {
-
-
     color: #ef4444;
-
-
     font-weight: bold;
-
-
+    text-align: center;
+    margin-bottom: 8px;
 }
-
-
-
-
-
-
 
 /* =========================
         FORMULAS
 ========================= */
 
-
 .formula-destacada {
-
-
     display: inline-flex;
-
-
     padding: 12px 25px;
-
-
     background: #eef2ff;
-
-
     border-radius: 12px;
-
-
     color: #1e3a8a;
-
-
     font-size: 20px;
-
-
 }
-
-
-
-
 
 .resultado-combinatoria {
-
-
     color: #2563eb;
-
-
     font-size: 25px;
-
-
     font-weight: 800;
-
-
 }
-
-
-
-
-
-
 
 /* =========================
         BOTONES
 ========================= */
 
-
 .resultados-container button {
-
-
     background: #2563eb;
-
-
     color: white !important;
-
-
     border: none;
-
-
     padding: 12px 25px;
-
-
     border-radius: 12px;
-
-
     cursor: pointer;
-
-
     font-weight: bold;
-
-
+    transition: background 0.3s ease;
 }
-
-
-
-
 
 .resultados-container button:hover {
-
-
     background: #1d4ed8;
-
-
 }
-
-
 
 /* =========================
    TITULOS CENTRADOS RESULTADOS
 ========================= */
 
-
-/* Fundamento Matemático */
-
 .matematicas-container-unificado h3 {
-
     width: 100%;
-
     text-align: center !important;
-
     color: #2563eb !important;
-
     margin-bottom: 30px;
-
 }
 
-
-
-
-/* Detalle de Horarios Generados */
-
-.resultados-container>h2 {
-
+.resultados-container > h2 {
     width: 100%;
-
     text-align: center !important;
-
     color: #2563eb !important;
-
     font-size: 28px;
-
     font-weight: 800;
-
     margin-top: 40px;
-
     margin-bottom: 30px;
-
 }
-
-
 
 /* =========================
         RESPONSIVE
 ========================= */
 
-
-@media(max-width:900px) {
-
-
+@media (max-width: 900px) {
     .resultados-container {
-
-
         padding: 20px;
-
-
     }
-
-
 }
 
-
-
-
-@media(max-width:600px) {
-
-
+@media (max-width: 600px) {
     .horario-card {
-
-
         width: 100%;
-
-
     }
-
-
-}
-
-
-
-
-/* =========================
-        RESPONSIVE
-========================= */
-
-
-@media(max-width:900px) {
-
-
-    .resultados-container {
-
-
-        padding: 20px;
-
-
-    }
-
-
-}
-
-
-
-
-
-@media(max-width:600px) {
-
-
-    .horario-card {
-
-
-        width: 100%;
-
-
-    }
-
-
-
 }
