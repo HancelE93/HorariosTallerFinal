@@ -24,17 +24,17 @@ function DetalleHorario() {
     const prerequisitesValid = !reasons.some(r => r.includes("prerrequisitos"));
 
     // 🎯 OBTENER NOMBRES DE MATERIAS OBLIGATORIAS (Una sola declaración limpia)
-    let requiredCoursesList = 
+    let requiredCoursesList =
         horario?.requiredCourses ||
-        horario?.config?.requiredCourses || 
-        resultadoGlobal?.config?.requiredCourses || 
-        resultadoGlobal?.requiredCourses || 
+        horario?.config?.requiredCourses ||
+        resultadoGlobal?.config?.requiredCourses ||
+        resultadoGlobal?.requiredCourses ||
         [];
 
     // Si la lista está vacía, la leemos directamente del mensaje de rechazo del backend
     if (requiredCoursesList.length === 0) {
         const todosLosHorarios = resultadoGlobal?.schedules || [horario];
-        
+
         for (const h of todosLosHorarios) {
             const razon = h?.reasons?.find(r => typeof r === "string" && r.includes("Faltan materias obligatorias:"));
             if (razon) {
@@ -146,98 +146,65 @@ function DetalleHorario() {
                     <>
 
 
-                        {
-                            horario.courses?.map((materia) => (
+                        <div className="dias-container">
 
+                            {
+                                horario.courses?.map((materia) => (
 
-                                <div
-                                    key={materia.id}
-                                    className="dia-container"
-                                >
+                                    <div
+                                        key={materia.id}
+                                        className="dia-container"
+                                    >
 
+                                        <h2>
+                                            {materia.day}
+                                        </h2>
 
-                                    <h2>
-                                        {materia.day}
-                                    </h2>
+                                        <div className="materia-detalle">
 
+                                            <h3>
+                                                📘 {materia.name}
+                                            </h3>
 
+                                            <p>
+                                                <strong>Hora:</strong>{" "}
+                                                {
+                                                    new Date(materia.startTime)
+                                                        .toLocaleTimeString([], {
+                                                            hour: "2-digit",
+                                                            minute: "2-digit"
+                                                        })
+                                                }
 
-                                    <div className="materia-detalle">
+                                                {" - "}
 
+                                                {
+                                                    new Date(materia.endTime)
+                                                        .toLocaleTimeString([], {
+                                                            hour: "2-digit",
+                                                            minute: "2-digit"
+                                                        })
+                                                }
+                                            </p>
 
-                                        <h3>
-                                            📘 {materia.name}
-                                        </h3>
+                                            <p>
+                                                <strong>Modalidad:</strong>{" "}
+                                                {materia.modality}
+                                            </p>
 
+                                            <p>
+                                                <strong>Créditos:</strong>{" "}
+                                                {materia.credits}
+                                            </p>
 
-
-                                        <p>
-
-                                            <strong>
-                                                Hora:
-                                            </strong>
-
-                                            {" "}
-
-                                            {
-                                                new Date(materia.startTime)
-                                                    .toLocaleTimeString([], {
-                                                        hour: "2-digit",
-                                                        minute: "2-digit"
-                                                    })
-                                            }
-
-
-                                            {" - "}
-
-
-                                            {
-                                                new Date(materia.endTime)
-                                                    .toLocaleTimeString([], {
-                                                        hour: "2-digit",
-                                                        minute: "2-digit"
-                                                    })
-                                            }
-
-                                        </p>
-
-
-
-                                        <p>
-
-                                            <strong>
-                                                Modalidad:
-                                            </strong>
-
-                                            {" "}
-
-                                            {materia.modality}
-
-                                        </p>
-
-
-
-                                        <p>
-
-                                            <strong>
-                                                Créditos:
-                                            </strong>
-
-                                            {" "}
-
-                                            {materia.credits}
-
-                                        </p>
-
+                                        </div>
 
                                     </div>
 
+                                ))
+                            }
 
-                                </div>
-
-
-                            ))
-                        }
+                        </div>
 
 
 

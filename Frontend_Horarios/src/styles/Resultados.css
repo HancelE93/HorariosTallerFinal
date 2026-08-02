@@ -2,23 +2,27 @@
         CONTENEDOR PRINCIPAL
 ========================= */
 
-.resultados-container{
+.resultados-container {
 
-    width:100%;
+    width: 100%;
 
-    min-height:100vh;
+    min-height: 100vh;
 
-    padding:40px;
+    padding: 40px;
 
-    box-sizing:border-box;
+    box-sizing: border-box;
 
-    font-family:"Segoe UI", Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 
-    background:linear-gradient(
-        135deg,
-        #f8fbff,
-        #eaf2ff
-    );
+    background: linear-gradient(to top,
+            #3b82f6 0%,
+            #60a5fa 20%,
+            #93c5fd 40%,
+            #bfdbfe 60%,
+            #dbeafe 80%,
+            #ffffff 100%);
+
+    animation: aparecer .8s ease;
 
 }
 
@@ -29,17 +33,17 @@
 ========================= */
 
 
-.resultados-container h1{
+.resultados-container h1 {
 
-    text-align:center;
+    text-align: center;
 
-    color:#2563eb !important;
+    color: #2563eb !important;
 
-    font-size:2.5rem;
+    font-size: 2.5rem;
 
-    font-weight:800;
+    font-weight: 800;
 
-    margin-bottom:35px;
+    margin-bottom: 35px;
 
 }
 
@@ -49,9 +53,9 @@
 
 .resultados-container h2,
 .resultados-container h3,
-.resultados-container h4{
+.resultados-container h4 {
 
-    color:#1d4ed8 !important;
+    color: #1d4ed8 !important;
 
 }
 
@@ -64,25 +68,25 @@
 ========================= */
 
 
-.resumen-horizontal-container{
+.resumen-horizontal-container {
 
 
-    display:flex;
+    display: flex;
 
 
-    justify-content:center;
+    justify-content: center;
 
 
-    align-items:center;
+    align-items: center;
 
 
-    gap:25px;
+    gap: 25px;
 
 
-    flex-wrap:wrap;
+    flex-wrap: wrap;
 
 
-    margin-bottom:40px;
+    margin-bottom: 40px;
 
 
 }
@@ -91,58 +95,46 @@
 
 
 
-.item-resumen{
+.item-resumen {
 
 
-    background:white;
+    background: white;
 
 
-    padding:18px 30px;
+    padding: 18px 30px;
 
 
-    border-radius:18px;
+    border-radius: 18px;
 
 
-    display:flex;
+    display: flex;
 
 
-    align-items:center;
+    align-items: center;
 
 
-    gap:12px;
+    gap: 12px;
 
 
-    border-left:5px solid #2563eb;
+    border-left: 5px solid #2563eb;
 
 
     box-shadow:
 
-    0 10px 25px rgba(0,0,0,.12);
+        0 10px 25px rgba(0, 0, 0, .12);
 
 
-    transition:.35s;
-
-
-}
-
-
-
-.item-resumen:hover{
-
-
-    transform:translateY(-5px);
+    transition: .35s;
 
 
 }
 
 
 
+.item-resumen:hover {
 
 
-.resumen-icon{
-
-
-    font-size:25px;
+    transform: translateY(-5px);
 
 
 }
@@ -151,10 +143,10 @@
 
 
 
-.resumen-texto{
+.resumen-icon {
 
 
-    color:#475569;
+    font-size: 25px;
 
 
 }
@@ -163,13 +155,25 @@
 
 
 
-.resumen-texto strong{
+.resumen-texto {
 
 
-    color:#2563eb;
+    color: #475569;
 
 
-    font-size:20px;
+}
+
+
+
+
+
+.resumen-texto strong {
+
+
+    color: #2563eb;
+
+
+    font-size: 20px;
 
 
 }
@@ -185,25 +189,25 @@
 ========================= */
 
 
-.bloques-grid{
+.bloques-grid {
 
 
-    display:flex;
+    display: flex;
 
 
-    justify-content:center;
+    justify-content: center;
 
 
-    align-items:center;
+    align-items: center;
 
 
-    gap:25px;
+    gap: 25px;
 
 
-    flex-wrap:wrap;
+    flex-wrap: wrap;
 
 
-    margin-bottom:50px;
+    margin-bottom: 50px;
 
 
 }
@@ -212,27 +216,27 @@
 
 
 
-.bloque-matematico-interno{
+.bloque-matematico-interno {
 
 
-    width:300px;
+    width: 300px;
 
 
-    background:white;
+    background: white;
 
 
-    padding:25px;
+    padding: 25px;
 
 
-    border-radius:18px;
+    border-radius: 18px;
 
 
-    text-align:center;
+    text-align: center;
 
 
     box-shadow:
 
-    0 10px 25px rgba(0,0,0,.12);
+        0 10px 25px rgba(0, 0, 0, .12);
 
 
 }
@@ -241,34 +245,13 @@
 
 
 
-.bloque-matematico-interno:hover{
+.bloque-matematico-interno:hover {
 
 
-    transform:translateY(-8px);
+    transform: translateY(-8px);
 
 
-    transition:.35s;
-
-
-}
-
-
-
-
-
-.grafico-torta-container{
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    align-items:center;
-
-
-    gap:15px;
+    transition: .35s;
 
 
 }
@@ -277,21 +260,42 @@
 
 
 
-.grafico-torta{
+.grafico-torta-container {
 
 
-    width:120px;
+    display: flex;
 
 
-    height:120px;
+    flex-direction: column;
 
 
-    border-radius:50%;
+    align-items: center;
+
+
+    gap: 15px;
+
+
+}
+
+
+
+
+
+.grafico-torta {
+
+
+    width: 120px;
+
+
+    height: 120px;
+
+
+    border-radius: 50%;
 
 
     box-shadow:
 
-    0 10px 25px rgba(0,0,0,.15);
+        0 10px 25px rgba(0, 0, 0, .15);
 
 
 }
@@ -300,51 +304,51 @@
 
 
 
-.leyenda-torta{
+.leyenda-torta {
 
 
-    display:flex;
+    display: flex;
 
 
-    gap:20px;
-
-
-}
-
-
-
-
-
-.dot{
-
-
-    width:12px;
-
-
-    height:12px;
-
-
-    border-radius:50%;
-
-
-    display:inline-block;
+    gap: 20px;
 
 
 }
 
 
 
-.dot.verde{
 
-    background:#10b981;
+
+.dot {
+
+
+    width: 12px;
+
+
+    height: 12px;
+
+
+    border-radius: 50%;
+
+
+    display: inline-block;
+
 
 }
 
 
 
-.dot.rojo{
+.dot.verde {
 
-    background:#ef4444;
+    background: #10b981;
+
+}
+
+
+
+.dot.rojo {
+
+    background: #ef4444;
 
 }
 
@@ -360,25 +364,25 @@
 
 
 .detalles-horarios,
-.horarios-container{
+.horarios-container {
 
 
-    display:flex;
+    display: flex;
 
 
-    justify-content:center;
+    justify-content: center;
 
 
-    align-items:center;
+    align-items: center;
 
 
-    gap:25px;
+    gap: 25px;
 
 
-    flex-wrap:wrap;
+    flex-wrap: wrap;
 
 
-    width:100%;
+    width: 100%;
 
 
 }
@@ -392,19 +396,19 @@
 .detalles-horarios h2,
 .detalles-horarios h3,
 .horarios-container h2,
-.horarios-container h3{
+.horarios-container h3 {
 
 
-    width:100%;
+    width: 100%;
 
 
-    text-align:center;
+    text-align: center;
 
 
-    color:#2563eb !important;
+    color: #2563eb !important;
 
 
-    margin-bottom:30px;
+    margin-bottom: 30px;
 
 
 }
@@ -413,85 +417,42 @@
 
 
 
-.horario-card{
+.horario-card {
 
 
-    width:260px;
+    width: 260px;
 
 
-    min-height:220px;
+    min-height: 220px;
 
 
-    background:white;
+    background: white;
 
 
-    padding:30px;
+    padding: 30px;
 
 
-    border-radius:18px;
+    border-radius: 18px;
 
 
-    border-left:5px solid #2563eb;
+    border-left: 5px solid #2563eb;
 
 
     box-shadow:
 
-    0 10px 25px rgba(0,0,0,.12);
+        0 10px 25px rgba(0, 0, 0, .12);
 
 
-    transition:.35s;
+    transition: .35s;
 
 
-    cursor:pointer;
+    cursor: pointer;
 
 
-    position:relative;
+    position: relative;
 
 
-    overflow:hidden;
-
-
-}
-
-
-
-
-
-.horario-card::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    top:0;
-
-
-    left:-100%;
-
-
-    width:100%;
-
-
-    height:100%;
-
-
-    background:linear-gradient(
-
-        120deg,
-
-        transparent,
-
-        rgba(37,99,235,.15),
-
-        transparent
-
-    );
-
-
-    transition:.5s;
+    overflow: hidden;
 
 
 }
@@ -500,10 +461,37 @@
 
 
 
-.horario-card:hover::before{
+.horario-card::before {
 
 
-    left:100%;
+    content: "";
+
+
+    position: absolute;
+
+
+    top: 0;
+
+
+    left: -100%;
+
+
+    width: 100%;
+
+
+    height: 100%;
+
+
+    background: linear-gradient(120deg,
+
+            transparent,
+
+            rgba(37, 99, 235, .15),
+
+            transparent);
+
+
+    transition: .5s;
 
 
 }
@@ -512,15 +500,27 @@
 
 
 
-.horario-card:hover{
+.horario-card:hover::before {
 
 
-    transform:translateY(-10px);
+    left: 100%;
+
+
+}
+
+
+
+
+
+.horario-card:hover {
+
+
+    transform: translateY(-10px);
 
 
     box-shadow:
 
-    0 20px 40px rgba(37,99,235,.25);
+        0 20px 40px rgba(37, 99, 235, .25);
 
 
 }
@@ -529,28 +529,13 @@
 
 
 
-.horario-card h3{
+.horario-card h3 {
 
 
-    text-align:center;
+    text-align: center;
 
 
-    color:#2563eb !important;
-
-
-}
-
-
-
-
-
-.horario-card ul{
-
-
-    list-style:none;
-
-
-    padding:0;
+    color: #2563eb !important;
 
 
 }
@@ -559,19 +544,34 @@
 
 
 
-.horario-card li{
+.horario-card ul {
 
 
-    background:#f8fbff;
+    list-style: none;
 
 
-    padding:10px;
+    padding: 0;
 
 
-    margin-bottom:8px;
+}
 
 
-    border-radius:10px;
+
+
+
+.horario-card li {
+
+
+    background: #f8fbff;
+
+
+    padding: 10px;
+
+
+    margin-bottom: 8px;
+
+
+    border-radius: 10px;
 
 
 }
@@ -587,27 +587,27 @@
 ========================= */
 
 
-.matematicas-container{
+.matematicas-container {
 
 
-    width:100%;
+    width: 100%;
 
 
-    background:white;
+    background: white;
 
 
-    padding:30px;
+    padding: 30px;
 
 
-    margin-top:40px;
+    margin-top: 40px;
 
 
-    border-radius:20px;
+    border-radius: 20px;
 
 
     box-shadow:
 
-    0 10px 25px rgba(0,0,0,.12);
+        0 10px 25px rgba(0, 0, 0, .12);
 
 
 }
@@ -616,19 +616,19 @@
 
 
 .matematicas-container h2,
-.matematicas-container h3{
+.matematicas-container h3 {
 
 
-    text-align:center !important;
+    text-align: center !important;
 
 
-    width:100%;
+    width: 100%;
 
 
-    color:#2563eb !important;
+    color: #2563eb !important;
 
 
-    margin-bottom:30px;
+    margin-bottom: 30px;
 
 
 }
@@ -637,10 +637,10 @@
 
 
 
-.bloques-grid{
+.bloques-grid {
 
 
-    justify-content:center;
+    justify-content: center;
 
 }
 
@@ -655,37 +655,22 @@
 ========================= */
 
 
-.materia-card{
+.materia-card {
 
 
-    background:#f8fbff;
+    background: #f8fbff;
 
 
-    padding:15px;
+    padding: 15px;
 
 
-    margin-top:15px;
+    margin-top: 15px;
 
 
-    border-radius:12px;
+    border-radius: 12px;
 
 
-    border-left:4px solid #2563eb;
-
-
-}
-
-
-
-
-
-.estado-valido{
-
-
-    color:#10b981;
-
-
-    font-weight:bold;
+    border-left: 4px solid #2563eb;
 
 
 }
@@ -694,13 +679,28 @@
 
 
 
-.estado-invalido{
+.estado-valido {
 
 
-    color:#ef4444;
+    color: #10b981;
 
 
-    font-weight:bold;
+    font-weight: bold;
+
+
+}
+
+
+
+
+
+.estado-invalido {
+
+
+    color: #ef4444;
+
+
+    font-weight: bold;
 
 
 }
@@ -716,25 +716,25 @@
 ========================= */
 
 
-.formula-destacada{
+.formula-destacada {
 
 
-    display:inline-flex;
+    display: inline-flex;
 
 
-    padding:12px 25px;
+    padding: 12px 25px;
 
 
-    background:#eef2ff;
+    background: #eef2ff;
 
 
-    border-radius:12px;
+    border-radius: 12px;
 
 
-    color:#1e3a8a;
+    color: #1e3a8a;
 
 
-    font-size:20px;
+    font-size: 20px;
 
 
 }
@@ -743,16 +743,16 @@
 
 
 
-.resultado-combinatoria{
+.resultado-combinatoria {
 
 
-    color:#2563eb;
+    color: #2563eb;
 
 
-    font-size:25px;
+    font-size: 25px;
 
 
-    font-weight:800;
+    font-weight: 800;
 
 
 }
@@ -768,28 +768,28 @@
 ========================= */
 
 
-.resultados-container button{
+.resultados-container button {
 
 
-    background:#2563eb;
+    background: #2563eb;
 
 
-    color:white !important;
+    color: white !important;
 
 
-    border:none;
+    border: none;
 
 
-    padding:12px 25px;
+    padding: 12px 25px;
 
 
-    border-radius:12px;
+    border-radius: 12px;
 
 
-    cursor:pointer;
+    cursor: pointer;
 
 
-    font-weight:bold;
+    font-weight: bold;
 
 
 }
@@ -798,10 +798,10 @@
 
 
 
-.resultados-container button:hover{
+.resultados-container button:hover {
 
 
-    background:#1d4ed8;
+    background: #1d4ed8;
 
 
 }
@@ -815,15 +815,15 @@
 
 /* Fundamento Matemático */
 
-.matematicas-container-unificado h3{
+.matematicas-container-unificado h3 {
 
-    width:100%;
+    width: 100%;
 
-    text-align:center !important;
+    text-align: center !important;
 
-    color:#2563eb !important;
+    color: #2563eb !important;
 
-    margin-bottom:30px;
+    margin-bottom: 30px;
 
 }
 
@@ -832,21 +832,21 @@
 
 /* Detalle de Horarios Generados */
 
-.resultados-container > h2{
+.resultados-container>h2 {
 
-    width:100%;
+    width: 100%;
 
-    text-align:center !important;
+    text-align: center !important;
 
-    color:#2563eb !important;
+    color: #2563eb !important;
 
-    font-size:28px;
+    font-size: 28px;
 
-    font-weight:800;
+    font-weight: 800;
 
-    margin-top:40px;
+    margin-top: 40px;
 
-    margin-bottom:30px;
+    margin-bottom: 30px;
 
 }
 
@@ -857,13 +857,13 @@
 ========================= */
 
 
-@media(max-width:900px){
+@media(max-width:900px) {
 
 
-    .resultados-container{
+    .resultados-container {
 
 
-        padding:20px;
+        padding: 20px;
 
 
     }
@@ -874,13 +874,13 @@
 
 
 
-@media(max-width:600px){
+@media(max-width:600px) {
 
 
-    .horario-card{
+    .horario-card {
 
 
-        width:100%;
+        width: 100%;
 
 
     }
@@ -896,13 +896,13 @@
 ========================= */
 
 
-@media(max-width:900px){
+@media(max-width:900px) {
 
 
-    .resultados-container{
+    .resultados-container {
 
 
-        padding:20px;
+        padding: 20px;
 
 
     }
@@ -914,13 +914,13 @@
 
 
 
-@media(max-width:600px){
+@media(max-width:600px) {
 
 
-    .horario-card{
+    .horario-card {
 
 
-        width:100%;
+        width: 100%;
 
 
     }
