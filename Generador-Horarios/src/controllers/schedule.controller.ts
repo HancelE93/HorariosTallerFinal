@@ -74,6 +74,7 @@ export const generarHorarios = async (req: Request, res: Response) => {
       totalCombinations,
       validSchedules: validCount,
       discardedSchedules: discardedCount,
+      config,
       schedules
     });
 

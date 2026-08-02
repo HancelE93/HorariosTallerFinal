@@ -95,6 +95,7 @@ export function getCourseNameSet(schedule: Course[]): Set<string> {
 
 // Extra: Función auxiliar para normalizar texto (quita tildes, convierte a minúsculas y limpia espacios)
 function normalizeText(text: string): string {
+  if (!text) return "";
   return text
     .toLowerCase()
     .normalize("NFD")
@@ -278,11 +279,15 @@ export function evaluateSchedule(
 ): EvaluationResult {
   const reasons: string[] = [];
 
-  // 1. Proposición O (Obligatorias)
+  // 1. Proposición O (Obligatorias - uso de texto normalizado)
   if (config.requiredCourses && config.requiredCourses.length > 0) {
-    const courseNames = getCourseNameSet(schedule);
-    const requiredSet = new Set(config.requiredCourses);
-    const missingCourses = [...requiredSet].filter(name => !courseNames.has(name));
+    const normalizedScheduleNames = new Set(
+      schedule.map(course => normalizeText(course.name))
+    );
+
+    const missingCourses = config.requiredCourses.filter(
+      requiredName => !normalizedScheduleNames.has(normalizeText(requiredName))
+    );
 
     if (missingCourses.length > 0) {
       reasons.push(`Faltan materias obligatorias: ${missingCourses.join(', ')}.`);
@@ -344,7 +349,7 @@ export function validateSchedule(
   // Evaluamos cada proposición individual:
   const T = schedule.length === configuration.numberOfCourses;
   const O = includesRequiredCourses(courseSet, new Set(configuration.requiredCourses || []));
-  const C = !hasScheduleConflicts(schedule);
+  const C = !configuration.avoidTimeConflicts || !hasScheduleConflicts(schedule);
   const M = validateRequiredModality(schedule, configuration.requiredModality);
   const D = validateMaximumDifficulty(schedule, configuration.maximumDifficultCourses);
   const R = validateMaximumCredits(schedule, configuration.maximumCredits);
