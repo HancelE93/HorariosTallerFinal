@@ -16,15 +16,14 @@
 
 
     background: linear-gradient(to top,
-            #6ea8ff 0%,
-            #8ec5ff 20%,
-            #b9ddff 45%,
-            #d7ebff 70%,
-            #edf6ff 85%,
+            #266de0 0%,
+            #3688ec 20%,
+            #4d8eda 40%,
+            #bfdbfe 60%,
+            #dbeafe 80%,
             #ffffff 100%);
 
     animation: aparecer .8s ease;
-
 }
 
 

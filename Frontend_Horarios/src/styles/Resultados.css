@@ -8,16 +8,16 @@
     padding: 40px;
     box-sizing: border-box;
     font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(
-        to top,
-        #3b82f6 0%,
-        #60a5fa 20%,
-        #93c5fd 40%,
-        #bfdbfe 60%,
-        #dbeafe 80%,
-        #ffffff 100%
-    );
-    animation: aparecer 0.8s ease;
+    background: linear-gradient(to top,
+            #266de0 0%,
+            #3688ec 20%,
+            #4d8eda 40%,
+            #bfdbfe 60%,
+            #dbeafe 80%,
+            #ffffff 100%);
+
+    animation: aparecer .8s ease;
+
 }
 
 /* =========================
@@ -149,7 +149,8 @@
 .horarios-container {
     display: flex;
     justify-content: center;
-    align-items: stretch; /* 👈 Hace que todas las tarjetas de la misma fila midan lo mismo */
+    align-items: stretch;
+    /* 👈 Hace que todas las tarjetas de la misma fila midan lo mismo */
     gap: 25px;
     flex-wrap: wrap;
     width: 100%;
@@ -157,7 +158,8 @@
 
 .horario-card {
     width: 280px;
-    min-height: 300px; /* 👈 Tamaño estándar uniforme */
+    min-height: 300px;
+    /* 👈 Tamaño estándar uniforme */
     background: white;
     padding: 25px;
     border-radius: 18px;
@@ -169,7 +171,8 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* 👈 Garantiza que el botón quede SIEMPRE pegado abajo */
+    justify-content: space-between;
+    /* 👈 Garantiza que el botón quede SIEMPRE pegado abajo */
 }
 
 .horario-card::before {
@@ -179,12 +182,10 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(37, 99, 235, 0.15),
-        transparent
-    );
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(37, 99, 235, 0.15),
+            transparent);
     transition: 0.5s;
 }
 
@@ -209,8 +210,10 @@
     border-radius: 12px;
     padding: 12px;
     margin: 10px 0;
-    max-height: 120px; /* 👈 Limita la altura para que no deforme la tarjeta */
-    overflow-y: auto; /* 👈 Agrega scroll suave si hay muchas razones */
+    max-height: 120px;
+    /* 👈 Limita la altura para que no deforme la tarjeta */
+    overflow-y: auto;
+    /* 👈 Agrega scroll suave si hay muchas razones */
     flex-grow: 1;
 }
 
@@ -232,7 +235,8 @@
 
 /* Botones fijados abajo */
 .horario-card button {
-    margin-top: auto; /* 👈 Alineación perfecta abajo */
+    margin-top: auto;
+    /* 👈 Alineación perfecta abajo */
     width: 100%;
 }
 
@@ -332,7 +336,7 @@
     margin-bottom: 30px;
 }
 
-.resultados-container > h2 {
+.resultados-container>h2 {
     width: 100%;
     text-align: center !important;
     color: #2563eb !important;
