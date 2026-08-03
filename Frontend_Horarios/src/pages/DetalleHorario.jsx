@@ -19,11 +19,12 @@ function DetalleHorario() {
     const reasons = horario?.reasons || [];
 
     // Evaluaciones lógicas (Si NO existe en los motivos, se cumplió la proposición = True)
-    const hasNoConflicts = !reasons.some(r => r.includes("cruces") || r.includes("superposición"));
+    const quantityValid = !reasons.some(r => r.includes("cantidad") || r.includes("solicitadas"));
     const includesRequired = !reasons.some(r => r.includes("obligatorias"));
     const creditsValid = !reasons.some(r => r.includes("créditos"));
     const difficultyValid = !reasons.some(r => r.includes("difíciles"));
     const modalityValid = !reasons.some(r => r.includes("modalidad"));
+    const hasNoConflicts = !reasons.some(r => r.includes("cruces") || r.includes("superposición"));
     const prerequisitesValid = !reasons.some(r => r.includes("prerrequisitos"));
 
     // OBTENER NOMBRES DE MATERIAS OBLIGATORIAS
@@ -98,14 +99,16 @@ function DetalleHorario() {
                 <div className="bloque-matematico">
                     <h4>1. Álgebra Proposicional (Regla de Conjunción)</h4>
 
+                    {/* FÓRMULA ORDENADA: T ∧ O ∧ R ∧ D ∧ M ∧ C ∧ P */}
                     <p className="formula-logica">
-                        <strong>Evaluación:</strong> C ∧ O ∧ R ∧ D ∧ M ∧ P ≡ {horario?.valid ? "1 (VERDADERO)" : "0 (FALSO)"}
+                        <strong>Evaluación:</strong> T ∧ O ∧ R ∧ D ∧ M ∧ C ∧ P ≡ {horario?.valid ? "1 (VERDADERO)" : "0 (FALSO)"}
                     </p>
 
+                    {/* TARJETAS ORDENADAS EXACTAMENTE IGUAL A LA TABLA */}
                     <div className="proposiciones-grid">
                         <div className="item-proposicion">
-                            <span className="estado-icon">{hasNoConflicts ? "✅" : "❌"}</span>
-                            <span><strong>C</strong> (Sin Cruces)</span>
+                            <span className="estado-icon">{quantityValid ? "✅" : "❌"}</span>
+                            <span><strong>T</strong> (Cantidad Materias)</span>
                         </div>
 
                         <div className="item-proposicion">
@@ -126,6 +129,11 @@ function DetalleHorario() {
                         <div className="item-proposicion">
                             <span className="estado-icon">{modalityValid ? "✅" : "❌"}</span>
                             <span><strong>M</strong> (Modalidad)</span>
+                        </div>
+
+                        <div className="item-proposicion">
+                            <span className="estado-icon">{hasNoConflicts ? "✅" : "❌"}</span>
+                            <span><strong>C</strong> (Sin Cruces)</span>
                         </div>
 
                         <div className="item-proposicion">
@@ -184,7 +192,7 @@ function DetalleHorario() {
                                 <td style={{ padding: "10px", border: "1px solid #e2e8f0" }}><b>T:</b> Cantidad de materias</td>
                                 <td style={{ padding: "10px", border: "1px solid #e2e8f0" }}>{config?.numberOfCourses ?? 3} materias</td>
                                 <td style={{ padding: "10px", border: "1px solid #e2e8f0" }}>{materiasArray.length} materias</td>
-                                <td style={{ padding: "10px", border: "1px solid #e2e8f0" }}>{materiasArray.length === Number(config?.numberOfCourses ?? materiasArray.length) ? "✅ V (Cumple)" : "❌ F (No cumple)"}</td>
+                                <td style={{ padding: "10px", border: "1px solid #e2e8f0" }}>{quantityValid ? "✅ V (Cumple)" : "❌ F (No cumple)"}</td>
                             </tr>
                             <tr>
                                 <td style={{ padding: "10px", border: "1px solid #e2e8f0" }}><b>O:</b> Materias obligatorias</td>
@@ -222,7 +230,6 @@ function DetalleHorario() {
                                     {hasNoConflicts ? "✅ V (Sin cruces)" : "❌ F (Existen cruces)"}
                                 </td>
                             </tr>
-
                             <tr>
                                 <td style={{ padding: "10px", border: "1px solid #e2e8f0" }}><b>P:</b> Prerrequisitos</td>
                                 <td style={{ padding: "10px", border: "1px solid #e2e8f0" }}>
