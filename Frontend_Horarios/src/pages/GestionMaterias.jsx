@@ -9,6 +9,7 @@ function GestionMaterias() {
 
     const [mostrarModal, setMostrarModal] = useState(false);
 
+
     const [editando, setEditando] = useState(false);
     const [idEditar, setIdEditar] = useState(null);
 
@@ -20,6 +21,7 @@ function GestionMaterias() {
     const [dificultad, setDificultad] = useState("");
     const [creditos, setCreditos] = useState("");
     const [prerrequisitos, setPrerrequisitos] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
 
     const cargarMaterias = useCallback(async () => {
         try {
@@ -226,6 +228,19 @@ function GestionMaterias() {
 
     };
 
+    const materiasFiltradas = materias.filter((materia) => {
+
+        const texto = busqueda.toLowerCase();
+
+        return (
+            materia.id.toString().includes(texto) ||
+            materia.name.toLowerCase().includes(texto) ||
+            materia.day.toLowerCase().includes(texto) ||
+            materia.modality.toLowerCase().includes(texto)
+        );
+
+    });
+
     return (
 
         <div className="contenedor">
@@ -239,6 +254,14 @@ function GestionMaterias() {
                     <p>
                         Total de materias: {materias.length}
                     </p>
+
+                    <input
+                        type="text"
+                        className="buscar-materia"
+                        placeholder="🔎 Buscar materia..."
+                        value={busqueda}
+                        onChange={(e) => setBusqueda(e.target.value)}
+                    />
 
                 </div>
 
@@ -255,7 +278,7 @@ function GestionMaterias() {
             </div>
 
             <ListaMaterias
-                materias={materias}
+                materias={materiasFiltradas}
                 eliminarMateria={eliminarMateria}
                 editarMateria={editarMateria}
             />
